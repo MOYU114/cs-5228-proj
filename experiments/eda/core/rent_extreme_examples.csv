@@ -1,0 +1,41 @@
+RENT_APPROVAL_DATE,TOWN,BLOCK,STREET,FLAT_TYPE,FLAT_MODEL,FLOOR_AREA_SQM,FURNISHED,LEASE_COMMENCE_DATE,FEE,MONTHLY_RENT,AGE_YEARS,YEAR,AGE_BAND,AREA_BAND,source_row_0based
+2022-04,punggol,623c,punggol central,2-room,model a,46.0,yes,2014,0.0,300,8,2022,0-9,<50,48007
+2021-08,central,8,jalan kukoh,2-room,improved,54.0,yes,1971,0.0,350,50,2021,50+,50-<70,24543
+2021-04,sembawang,463a,sembawang drive,2-room,model a,46.0,yes,2015,0.0,400,6,2021,0-9,<50,9563
+2021-09,sembawang,463a,sembawang drive,2-room,model a,46.0,yes,2015,0.0,400,6,2021,0-9,<50,26977
+2022-03,sembawang,463a,sembawang drive,2-room,model a,46.0,yes,2015,0.0,400,7,2022,0-9,<50,44521
+2022-04,woodlands,16,marsiling lane,2-room,improved,45.0,yes,1984,0.0,400,38,2022,30-39,<50,47826
+2023-04,jurong west,191,boon lay drive,2-room,model a,37.0,yes,1978,0.0,400,45,2023,40-49,<50,81843
+2025-01,hougang,995b,buangkok crescent,2-room,model a,38.0,yes,2019,0.0,400,6,2025,0-9,<50,142876
+2021-06,jurong west,181b,boon lay drive,2-room,model a,47.0,yes,2014,0.0,450,7,2021,0-9,<50,18169
+2023-01,woodlands,16,marsiling lane,2-room,improved,45.0,yes,1984,0.0,450,39,2023,30-39,<50,72290
+2022-02,bukit batok,468b,bukit batok west avenue 9,2-room,2 room,47.0,yes,2021,0.0,480,1,2022,0-9,<50,42143
+2024-10,bedok,545,bedok north street 3,3-room,new generation,68.0,yes,1980,0.0,490,44,2024,40-49,50-<70,133003
+2021-06,ang mo kio,170,ang mo kio avenue 4,2-room,improved,45.0,yes,1986,0.0,500,35,2021,30-39,<50,18249
+2021-07,geylang,70,circuit road,2-room,standard,45.0,yes,1969,0.0,500,52,2021,50+,<50,21036
+2021-09,hougang,991a,buangkok link,2-room,model a,47.0,yes,2019,0.0,500,2,2021,0-9,<50,26026
+2021-11,hougang,986b,buangkok crescent,2-room,model a,47.0,yes,2012,0.0,500,9,2021,0-9,<50,32366
+2021-11,bukit merah,10,jalan bukit ho swee,2-room,standard,34.0,yes,1971,0.0,500,50,2021,50+,<50,33459
+2022-05,bukit merah,127c,kim tian road,2-room,model a,47.0,yes,2013,0.0,500,9,2022,0-9,<50,50364
+2022-07,geylang,70,circuit road,2-room,standard,45.0,yes,1969,0.0,500,53,2022,50+,<50,56547
+2022-09,punggol,327b,sumang walk,2-room,model a,47.0,yes,2018,0.0,500,4,2022,0-9,<50,62242
+2023-11,central,2,tanjong pagar plaza,5-room,adjoined flat,129.0,yes,1977,0.0,7600,46,2023,40-49,110-<130,101586
+2023-09,geylang,11,pine close,5-room,improved,113.0,yes,2000,0.0,7400,23,2023,20-29,110-<130,96685
+2023-11,queenstown,13,holland drive,5-room,adjoined flat,147.0,yes,1975,0.0,6800,48,2023,40-49,130-<150,100082
+2023-05,choa chu kang,641,choa chu kang street 64,executive,premium maisonette,215.0,yes,1998,0.0,6600,25,2023,20-29,150+,82064
+2023-07,tampines,110,tampines street 11,executive,adjoined flat,152.0,yes,1984,0.0,6550,39,2023,30-39,150+,90975
+2023-02,ang mo kio,549,ang mo kio avenue 10,5-room,adjoined flat,136.0,yes,1981,0.0,6500,42,2023,40-49,130-<150,73524
+2024-01,queenstown,13,holland drive,5-room,adjoined flat,147.0,yes,1975,0.0,6500,49,2024,40-49,130-<150,107322
+2024-07,kallang/whampoa,93,whampoa drive,5-room,adjoined flat,151.0,yes,1974,0.0,6500,50,2024,50+,150+,127064
+2023-08,queenstown,170,stirling road,5-room,adjoined flat,139.0,yes,1970,0.0,6400,53,2023,50+,130-<150,91751
+2023-09,queenstown,2,holland avenue,5-room,adjoined flat,130.0,yes,1974,0.0,6300,49,2023,40-49,130-<150,95642
+2023-09,bukit merah,42,kim cheng street,3-room,standard,88.0,yes,1973,0.0,6300,50,2023,50+,70-<90,95826
+2023-02,central,1b,cantonment road,5-room,type s2,105.0,yes,2011,0.0,6250,12,2023,10-19,90-<110,75307
+2022-11,bukit merah,35,lim liak street,3-room,standard,88.0,yes,1973,0.0,6200,49,2022,40-49,70-<90,66744
+2022-12,bukit merah,17,seng poh road,4-room,standard,110.0,yes,1973,0.0,6200,49,2022,40-49,110-<130,70006
+2023-04,bukit merah,21,lim liak street,3-room,standard,88.0,yes,1973,0.0,6200,50,2023,50+,70-<90,79430
+2024-02,bukit merah,130,bukit merah view,5-room,adjoined flat,130.0,yes,1973,0.0,6200,51,2024,50+,130-<150,111038
+2024-04,queenstown,3,ghim moh road,5-room,adjoined flat,150.0,yes,1976,0.0,6200,48,2024,40-49,150+,116544
+2025-02,bukit merah,130,bukit merah view,5-room,adjoined flat,130.0,yes,1973,0.0,6200,52,2025,50+,130-<150,145416
+2023-03,jurong east,216,jurong east street 21,executive,maisonette,148.0,yes,1985,0.0,6150,38,2023,30-39,130-<150,76353
+2023-01,ang mo kio,639,ang mo kio avenue 6,5-room,adjoined flat,136.0,yes,1980,0.0,6100,43,2023,40-49,130-<150,71904

@@ -1,0 +1,86 @@
+NAME,SYMBOL,DATE,OPEN,HIGH,LOW,CLOSE,ADJUSTED_CLOSE,VOLUME,parsed_date,month,missing_price
+DBS Group,D05.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+DBS Group,D05.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+OCBC Bank,O39.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+OCBC Bank,O39.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+UOB,U11.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+UOB,U11.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Singtel,Z74.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Singtel,Z74.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+ST Engineering,S63.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+ST Engineering,S63.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Singapore Exchange,S68.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Singapore Exchange,S68.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Wilmar International,F34.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Wilmar International,F34.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Singapore Airlines,C6L.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Singapore Airlines,C6L.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Keppel,BN4.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Keppel,BN4.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+CapitaLand Mall Trust,C38U.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+CapitaLand Mall Trust,C38U.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+CapitaLand Investment Limited,9CI.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+CapitaLand Investment Limited,9CI.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Ascendas Reit,A17U.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Ascendas Reit,A17U.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Jardine Cycle & Carriage,C07.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Jardine Cycle & Carriage,C07.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Sembcorp,U96.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Sembcorp,U96.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+UOL Group,U14.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+UOL Group,U14.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Genting Singapore,G13.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Genting Singapore,G13.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Seatrium,5E2.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Seatrium,5E2.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+City Developments,C09.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+City Developments,C09.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+SATS,S58.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+SATS,S58.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Mapletree Commercial Trust,N2IU.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Mapletree Commercial Trust,N2IU.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Mapletree Logistics Trust,M44U.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Mapletree Logistics Trust,M44U.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Mapletree Industrial Trust,ME8U.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Mapletree Industrial Trust,ME8U.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Olam,VC2.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Olam,VC2.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Singapore Land,U06.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Singapore Land,U06.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Venture Corporation,V03.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Venture Corporation,V03.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Sheng Siong Group,OV8.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Sheng Siong Group,OV8.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Suntec REIT,T82U.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Suntec REIT,T82U.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Keppel REIT,K71U.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Keppel REIT,K71U.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+NetLink Trust,CJLU.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+NetLink Trust,CJLU.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Frasers Logistics & Industrial Trust,BUOU.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Frasers Logistics & Industrial Trust,BUOU.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Golden Agri-Resources,E5H.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Golden Agri-Resources,E5H.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+SIA Engineering Company,S59.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+SIA Engineering Company,S59.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Haw Par,H02.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Haw Par,H02.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+CapitaLand Ascott Trust,HMN.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+CapitaLand Ascott Trust,HMN.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+ComfortDelGro,C52.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+ComfortDelGro,C52.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+iFAST Corporation,AIY.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+iFAST Corporation,AIY.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Hotel Properties Limited,H15.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+HPH Trust (Hutchison Port),NS8U.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+HPH Trust (Hutchison Port),NS8U.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Pacific Century Regional Developments,P15.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Pacific Century Regional Developments,P15.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Yanlord,Z25.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Yanlord,Z25.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Riverstone Holdings,AP4.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Riverstone Holdings,AP4.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Singapore Post,S08.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Singapore Post,S08.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True
+Penguin International Limited,BTM.SI,2026-05-01,,,,,,,2026-05-01,2026-05,True
+Penguin International Limited,BTM.SI,2026-06-01,,,,,,,2026-06-01,2026-06,True

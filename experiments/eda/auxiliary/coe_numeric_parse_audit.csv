@@ -1,0 +1,5 @@
+field,parse_failures,minimum,maximum,zero_count,negative_count
+QUOTA_PREMIUM,0,35900.0,158004.0,0,0
+PREVAILING_QUOTA_PREMIUM,0,0.0,138094.0,134,0
+QUOTA,0,43.0,1306.0,0,0
+BIDS_RECEIVED,0,65.0,2572.0,0,0

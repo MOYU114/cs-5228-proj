@@ -1,0 +1,7 @@
+file,rows,columns,full_duplicate_excess,null_cells,column_names,constant_fields
+sg-coe-prices.csv,539,8,0,0,"['YEAR', 'CATEGORY', 'MONTH', 'ROUND', 'QUOTA_PREMIUM', 'PREVAILING_QUOTA_PREMIUM', 'QUOTA', 'BIDS_RECEIVED']",[]
+sg-hdb-block.csv,9464,11,0,0,"['TOWN', 'BLOCK', 'STREET', 'POSTAL_CODE', 'LATITUDE', 'LONGITUDE', 'MAX_FLOOR', 'YEAR_COMPLETED', 'SUBZONE', 'PLANNING_AREA', 'REGION']",[]
+sg-mrt-stations.csv,243,8,0,0,"['CODE', 'NAME', 'STATUS', 'LATITUDE', 'LONGITUDE', 'SUBZONE', 'PLANNING_AREA', 'REGION']",[]
+sg-schools.csv,337,14,0,0,"['NAME', 'URL', 'STREET', 'POSTAL_CODE', 'MRT_STATIONS', 'BUS_LINES', 'PLANNING_AREA', 'REGION', 'TYPE_CODE', 'NATRUE_CODE', 'SESSION_CODE', 'MAINLEVEL_CODE', 'LATITUDE', 'LONGITUDE']",[]
+sg-shopping-malls.csv,113,3,0,0,"['NAME', 'LATITUDE', 'LONGITUDE']",[]
+sg-stock-prices.csv,91642,9,0,510,"['NAME', 'SYMBOL', 'DATE', 'OPEN', 'HIGH', 'LOW', 'CLOSE', 'ADJUSTED_CLOSE', 'VOLUME']",[]
