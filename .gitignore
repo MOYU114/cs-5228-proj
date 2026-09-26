@@ -1,0 +1,28 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Private competition data and generated outputs; keep written records visible.
+data/**/*.csv
+data/**/*.parquet
+data/**/*.zip
+submissions/*.csv
+proposal/experiments/**/*.csv
+proposal/experiments/**/*.parquet
+proposal/experiments/**/*.pkl
+proposal/experiments/**/*.joblib
+proposal/experiments/**/*.png
+proposal/experiments/**/*.pdf
+
+# LaTeX build files; retain source .tex and chosen final PDFs.
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
