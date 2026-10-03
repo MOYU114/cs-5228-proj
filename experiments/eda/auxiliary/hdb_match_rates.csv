@@ -1,7 +1,0 @@
-split,mode,rows,matched_rows,unique_match_rows,ambiguous_rows,unmatched_rows,row_match_pct,unique_keys,matched_unique_keys,unique_key_match_pct
-train,raw_town_block_street,150000,119219,119219,0,30781,79.47933333333333,17413,9344,53.661057830356626
-test,raw_town_block_street,50000,39518,39518,0,10482,79.036,14314,8674,60.59801592846165
-train,normalized_town_block_street,150000,150000,150000,0,0,100.0,9406,9406,100.0
-test,normalized_town_block_street,50000,50000,50000,0,0,100.0,8940,8940,100.0
-train,normalized_block_street,150000,150000,150000,0,0,100.0,9406,9406,100.0
-test,normalized_block_street,50000,50000,50000,0,0,100.0,8940,8940,100.0

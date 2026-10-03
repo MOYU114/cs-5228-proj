@@ -1,0 +1,1473 @@
+{
+  "revision": "mrt_monthly_v2",
+  "min_month": "2021-01",
+  "max_month": "2026-07",
+  "policy": "Count stations from the first complete calendar month after opening. Baseline 2021-01 means already operating, not an opening date. Null entries are excluded within this bounded scope. Coordinates deduplicated after temporal filtering.",
+  "sources": [
+    "https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/thomson_east_coast_line.html",
+    "https://www.lta.gov.sg/content/ltagov/en/newsroom/2025/1/news-releases/hume_station_to_open.html",
+    "https://www.lta.gov.sg/content/ltagov/en/newsroom/2024/10/news-releases/punggol_coast_station_to_open_for_passenger_service.html",
+    "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/3/news-releases/next-phase-of-rail-development.html",
+    "https://www.mot.gov.sg/news-resources/newsroom/opening-remarks-by-acting-minister-for-transport-jeffrey-siow-at-circle-line-6-public-preview/"
+  ],
+  "stations": {
+    "ns10": {
+      "name": "admiralty mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew9": {
+      "name": "aljunied mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns16": {
+      "name": "ang mo kio mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr11": {
+      "name": "ang mo kio mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cr2": {
+      "name": "aviation park mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "js7": {
+      "name": "bahar junction mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc12": {
+      "name": "bartley mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc34": {
+      "name": "bayfront mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt16": {
+      "name": "bayfront mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te29": {
+      "name": "bayshore mrt station",
+      "available_from": "2024-07",
+      "opening_date": "2024-06-23",
+      "reason": "first complete month after confirmed opening"
+    },
+    "dt5": {
+      "name": "beauty world mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew5": {
+      "name": "bedok mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt29": {
+      "name": "bedok north mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt30": {
+      "name": "bedok reservoir mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te30": {
+      "name": "bedok south mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "dt21": {
+      "name": "bencoolen mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt23": {
+      "name": "bendemeer mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns17": {
+      "name": "bishan mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc15": {
+      "name": "bishan mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne9": {
+      "name": "boon keng mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew27": {
+      "name": "boon lay mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "js8": {
+      "name": "boon lay mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc19": {
+      "name": "botanic gardens mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt9": {
+      "name": "botanic gardens mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns18": {
+      "name": "braddell mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc2": {
+      "name": "bras basah mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns3a": {
+      "name": "brickland mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "te7": {
+      "name": "bright hill mrt station",
+      "available_from": "2021-09",
+      "opening_date": "2021-08-28",
+      "reason": "first complete month after confirmed opening"
+    },
+    "cr13": {
+      "name": "bright hill mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ne15": {
+      "name": "buangkok mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew12": {
+      "name": "bugis mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt14": {
+      "name": "bugis mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns2": {
+      "name": "bukit batok mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "je3": {
+      "name": "bukit batok west mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc18": {
+      "name": "bukit brown mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns3": {
+      "name": "bukit gombak mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt1": {
+      "name": "bukit panjang mrt/lrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "bp6": {
+      "name": "bukit panjang mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "LRT or cross-border service; not domestic MRT"
+    },
+    "ew21": {
+      "name": "buona vista mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc22": {
+      "name": "buona vista mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc17": {
+      "name": "caldecott mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te9": {
+      "name": "caldecott mrt station",
+      "available_from": "2021-09",
+      "opening_date": "2021-08-28",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ns12": {
+      "name": "canberra mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc31": {
+      "name": "cantonment mrt station",
+      "available_from": "2026-08",
+      "opening_date": "2026-07-12",
+      "reason": "first complete month after confirmed opening"
+    },
+    "dt2": {
+      "name": "cashew mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cg2": {
+      "name": "changi airport mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te32": {
+      "name": "changi terminal 5 mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cr1": {
+      "name": "changi terminal 5 mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ne4": {
+      "name": "chinatown mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt19": {
+      "name": "chinatown mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew25": {
+      "name": "chinese garden mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns4": {
+      "name": "choa chu kang mrt/lrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "js1": {
+      "name": "choa chu kang mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "bp1": {
+      "name": "choa chu kang mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "LRT or cross-border service; not domestic MRT"
+    },
+    "js2": {
+      "name": "choa chu kang west mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns25": {
+      "name": "city hall mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew13": {
+      "name": "city hall mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne5": {
+      "name": "clarke quay mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew23": {
+      "name": "clementi mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr17": {
+      "name": "clementi mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ew20": {
+      "name": "commonwealth mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "js5": {
+      "name": "corporation mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc8": {
+      "name": "dakota mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "de1": {
+      "name": "de1 mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cr7": {
+      "name": "defu mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns24": {
+      "name": "dhoby ghaut mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne6": {
+      "name": "dhoby ghaut mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc1": {
+      "name": "dhoby ghaut mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew22": {
+      "name": "dover mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt17": {
+      "name": "downtown mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cp2": {
+      "name": "elias mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "js9": {
+      "name": "enterprise mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc3": {
+      "name": "esplanade mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew7": {
+      "name": "eunos mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cg1": {
+      "name": "expo mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt35": {
+      "name": "expo mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne8": {
+      "name": "farrer park mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc20": {
+      "name": "farrer road mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt20": {
+      "name": "fort canning mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te22a": {
+      "name": "founders' memorial mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "te22": {
+      "name": "gardens by the bay mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "jw1": {
+      "name": "gek poh mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "dt24": {
+      "name": "geylang bahru mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te15": {
+      "name": "great world mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ew30": {
+      "name": "gul circle mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr23": {
+      "name": "gul circle mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ne1": {
+      "name": "harbourfront mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc29": {
+      "name": "harbourfront mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te16": {
+      "name": "havelock mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "cc25": {
+      "name": "haw par villa mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt3": {
+      "name": "hillview mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc21": {
+      "name": "holland village mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "js4": {
+      "name": "hong kah mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ne14": {
+      "name": "hougang mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr8": {
+      "name": "hougang mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "dt4": {
+      "name": "hume mrt station",
+      "available_from": "2025-03",
+      "opening_date": "2025-02-28",
+      "reason": "first complete month after confirmed opening"
+    },
+    "dt22": {
+      "name": "jalan besar mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew29": {
+      "name": "joo koon mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns1": {
+      "name": "jurong east mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew24": {
+      "name": "jurong east mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "je5": {
+      "name": "jurong east mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "js11": {
+      "name": "jurong hill mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cr19": {
+      "name": "jurong lake district mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "js12": {
+      "name": "jurong pier mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cr21": {
+      "name": "jurong pier mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "je6": {
+      "name": "jurong town hall mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "js6": {
+      "name": "jurong west mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "dt28": {
+      "name": "kaki bukit mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew10": {
+      "name": "kallang mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te24": {
+      "name": "katong park mrt station",
+      "available_from": "2024-07",
+      "opening_date": "2024-06-23",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ew6": {
+      "name": "kembangan mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc24": {
+      "name": "kent ridge mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc30": {
+      "name": "keppel mrt station",
+      "available_from": "2026-08",
+      "opening_date": "2026-07-12",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ns14": {
+      "name": "khatib mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt6": {
+      "name": "king albert park mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr15": {
+      "name": "king albert park mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ne13": {
+      "name": "kovan mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns7": {
+      "name": "kranji mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc27": {
+      "name": "labrador park mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew26": {
+      "name": "lakeside mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew11": {
+      "name": "lavender mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te5": {
+      "name": "lentor mrt station",
+      "available_from": "2021-09",
+      "opening_date": "2021-08-28",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ne7": {
+      "name": "little india mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt12": {
+      "name": "little india mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc14": {
+      "name": "lorong chuan mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr3": {
+      "name": "loyang mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc10": {
+      "name": "macpherson mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt26": {
+      "name": "macpherson mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr16": {
+      "name": "maju mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns27": {
+      "name": "marina bay mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc33": {
+      "name": "marina bay mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te20": {
+      "name": "marina bay mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "te21": {
+      "name": "marina south mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns28": {
+      "name": "marina south pier mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te26": {
+      "name": "marine parade mrt station",
+      "available_from": "2024-07",
+      "opening_date": "2024-06-23",
+      "reason": "first complete month after confirmed opening"
+    },
+    "te27": {
+      "name": "marine terrace mrt station",
+      "available_from": "2024-07",
+      "opening_date": "2024-06-23",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ns8": {
+      "name": "marsiling mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc16": {
+      "name": "marymount mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt25": {
+      "name": "mattar mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te18": {
+      "name": "maxwell mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "te6": {
+      "name": "mayflower mrt station",
+      "available_from": "2021-09",
+      "opening_date": "2021-08-28",
+      "reason": "first complete month after confirmed opening"
+    },
+    "te10": {
+      "name": "mount pleasant mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc7": {
+      "name": "mountbatten mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "jw4": {
+      "name": "nanyang crescent mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "jw3": {
+      "name": "nanyang gateway mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "te12": {
+      "name": "napier mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ns21": {
+      "name": "newton mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt11": {
+      "name": "newton mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc5": {
+      "name": "nicoll highway mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns20": {
+      "name": "novena mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc23": {
+      "name": "one-north mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te13": {
+      "name": "orchard boulevard mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ns22": {
+      "name": "orchard mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te14": {
+      "name": "orchard mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ew16": {
+      "name": "outram park mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne3": {
+      "name": "outram park mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te17": {
+      "name": "outram park mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "je7": {
+      "name": "pandan reservoir mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc26": {
+      "name": "pasir panjang mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr4": {
+      "name": "pasir ris east mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ew1": {
+      "name": "pasir ris mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr5": {
+      "name": "pasir ris mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cp1": {
+      "name": "pasir ris mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ew8": {
+      "name": "paya lebar mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc9": {
+      "name": "paya lebar mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "jw5": {
+      "name": "peng kang hill mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ew28": {
+      "name": "pioneer mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne10": {
+      "name": "potong pasir mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc32": {
+      "name": "prince edward road mrt station",
+      "available_from": "2026-08",
+      "opening_date": "2026-07-12",
+      "reason": "first complete month after confirmed opening"
+    },
+    "cc4": {
+      "name": "promenade mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt15": {
+      "name": "promenade mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne18": {
+      "name": "punggol coast mrt station",
+      "available_from": "2025-01",
+      "opening_date": "2024-12-10",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ne17": {
+      "name": "punggol mrt/lrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cp4": {
+      "name": "punggol mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ptc": {
+      "name": "punggol mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "LRT or cross-border service; not domestic MRT"
+    },
+    "ew19": {
+      "name": "queenstown mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns26": {
+      "name": "raffles place mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew14": {
+      "name": "raffles place mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew18": {
+      "name": "redhill mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cp3": {
+      "name": "riviera mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "pe4": {
+      "name": "riviera mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "LRT or cross-border service; not domestic MRT"
+    },
+    "dt13": {
+      "name": "rochor mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns11": {
+      "name": "sembawang mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne16": {
+      "name": "sengkang mrt/lrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "stc": {
+      "name": "sengkang mrt/lrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "LRT or cross-border service; not domestic MRT"
+    },
+    "ne12": {
+      "name": "serangoon mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc13": {
+      "name": "serangoon mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr9": {
+      "name": "serangoon north mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "te19": {
+      "name": "shenton way mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "te28": {
+      "name": "siglap mrt station",
+      "available_from": "2024-07",
+      "opening_date": "2024-06-23",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ew3": {
+      "name": "simei mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt7": {
+      "name": "sixth avenue mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns23": {
+      "name": "somerset mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te4": {
+      "name": "springleaf mrt station",
+      "available_from": "2021-09",
+      "opening_date": "2021-08-28",
+      "reason": "first complete month after confirmed opening"
+    },
+    "cc6": {
+      "name": "stadium mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt10": {
+      "name": "stevens mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te11": {
+      "name": "stevens mrt station",
+      "available_from": "2022-12",
+      "opening_date": "2022-11-13",
+      "reason": "first complete month after confirmed opening"
+    },
+    "dt37": {
+      "name": "sungei bedok mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "te31": {
+      "name": "sungei bedok mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns6": {
+      "name": "sungei kadut mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "de2": {
+      "name": "sungei kadut mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cc11": {
+      "name": "tai seng mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt33": {
+      "name": "tampines east mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew2": {
+      "name": "tampines mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt32": {
+      "name": "tampines mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cr6": {
+      "name": "tampines north mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "dt31": {
+      "name": "tampines west mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt8": {
+      "name": "tan kah kee mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew4": {
+      "name": "tanah merah mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cg": {
+      "name": "tanah merah mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "te25": {
+      "name": "tanjong katong mrt station",
+      "available_from": "2024-07",
+      "opening_date": "2024-06-23",
+      "reason": "first complete month after confirmed opening"
+    },
+    "ew15": {
+      "name": "tanjong pagar mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te23": {
+      "name": "tanjong rhu mrt station",
+      "available_from": "2024-07",
+      "opening_date": "2024-06-23",
+      "reason": "first complete month after confirmed opening"
+    },
+    "cr10": {
+      "name": "tavistock mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "jw2": {
+      "name": "tawas mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cr12": {
+      "name": "teck ghee mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "dt18": {
+      "name": "telok ayer mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "cc28": {
+      "name": "telok blangah mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "js3": {
+      "name": "tengah mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "je2": {
+      "name": "tengah park mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "je1": {
+      "name": "tengah plantation mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ew17": {
+      "name": "tiong bahru mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns19": {
+      "name": "toa payoh mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "je4": {
+      "name": "toh guan mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ew31": {
+      "name": "tuas crescent mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew33": {
+      "name": "tuas link mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ew32": {
+      "name": "tuas west road mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "js10": {
+      "name": "tukang mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "cr14": {
+      "name": "turf city mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "dt27": {
+      "name": "ubi mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt34": {
+      "name": "upper changi mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te8": {
+      "name": "upper thomson mrt station",
+      "available_from": "2021-09",
+      "opening_date": "2021-08-28",
+      "reason": "first complete month after confirmed opening"
+    },
+    "cr18": {
+      "name": "west coast mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns9": {
+      "name": "woodlands mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te2": {
+      "name": "woodlands mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "te1": {
+      "name": "woodlands north mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "rts": {
+      "name": "woodlands north mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "LRT or cross-border service; not domestic MRT"
+    },
+    "te3": {
+      "name": "woodlands south mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ne11": {
+      "name": "woodleigh mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "dt36": {
+      "name": "xilin mrt station",
+      "available_from": null,
+      "opening_date": null,
+      "reason": "no verified operating month within scope; future or deferred station/line"
+    },
+    "ns5": {
+      "name": "yew tee mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns15": {
+      "name": "yio chu kang mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    },
+    "ns13": {
+      "name": "yishun mrt station",
+      "available_from": "2021-01",
+      "opening_date": null,
+      "reason": "operating before scope start"
+    }
+  }
+}

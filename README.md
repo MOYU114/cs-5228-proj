@@ -1,40 +1,270 @@
-# CS5228 HDB Rental Prediction
+# HDB rental price prediction with a two-stage tabular BERT
 
-本项目预测新加坡 HDB 整套住房的月租金。课程要求、数据说明和交付要求见 [`docs/Project Desc.md`](docs/Project%20Desc.md)。任务与验证原则见 [`docs/PROJECT_TASK_GUIDE.md`](docs/PROJECT_TASK_GUIDE.md)；四人分工和交接流程见 [`docs/TEAM_WORKFLOW.md`](docs/TEAM_WORKFLOW.md)；进度报告前的推进计划见 [`docs/PROGRESS_PLAN.md`](docs/PROGRESS_PLAN.md)。
+This project predicts the monthly rent of Singapore HDB flats (CS5228 project, regression, scored by RMSE). Every rental record is turned into a short sequence of field tokens and fed to a BERT encoder that is first pretrained to reconstruct masked fields and then fine-tuned to predict the rent.
 
-已完成第一阶段 EDA、六份辅助数据审计、现代方法调研与五候选评估。当前建议按 **TabM → 时间调制 TabM → TabICLv2 → TabPFN-3.5 → ModernNCA** 尝试，以原尺度 RMSE 和共同时间验证判断结果。这是待验证清单，尚未训练模型、产生预测或提交 Kaggle。GPU 可以使用，成本仅为软偏好。
+| | |
+|---|---|
+| Submission | `submissions/submission_bert_two_stage.csv` (50,000 predictions) |
+| Model | 12-layer BERT encoder over 29 field tokens, 86 million parameters |
+| Validation RMSE | **468.3 SGD** on the last 12 months of labelled data (35,058 rentals); always predicting the training mean gives 842.5 |
+| Training time | about 4 h 45 min on one RTX 5090 Laptop GPU |
 
-## 从这里开始
-
-1. **决定先尝试什么：** [最佳尝试清单](docs/research/PRIORITY_PLAN.md)，包括排序、指标、晋级规则、融合设计和 B/C 交接。
-2. **查看数据依据：** [EDA 报告](docs/EDA_REPORT.md)，包括实际统计、图表、清洗规则及辅助数据风险。
-3. **追溯调研与评估：** [调研目录](docs/research/README.md)；当前文档、证据和历史归档已分开。
-4. **审阅英文稿与 slides：** [proposal 入口](proposal/README.md)，包含英文正文、14 页 slides 工作稿、[逐页规划](proposal/SLIDE_PLAN.md)、可编辑源文件和构建说明。
-5. **重新运行：** [EDA 复现说明](notebooks/README_EDA.md)；[调研计数与验证说明](experiments/research/README.md)。
-
-英文 proposal 的问题描述与 EDA 已完成；slides 按完整项目规划为 14 页，第 1–6 页已成稿，第 7–14 页为待补充提纲，等待团队审阅。接下来由团队决定首轮实验范围，B/C 共用时间划分、输入信息与 RMSE；2026 年 10 月 4 日进度报告节点见项目计划。尚无模型结果，最终报告未修改。
-
-## 工作区
-
-```text
-data/                     # 课程原始 train/test 和 auxiliary/ 辅助数据
-configs/                  # 验证切分与候选方案配置；方案确定后再添加
-docs/                     # 课程/团队文档与 EDA_REPORT.md
-  research/               # PRIORITY_PLAN、完整调研、idea-evaluator、研究范围
-    evidence/             # 三份现代方法的文献与源码证据
-    archive/cpu/          # 早期 CPU 候选及探索记录，非现行方案
-    archive/gpu/          # GPU 中间修订，非现行方案
-experiments/              # 派生结果与后续实验；当前没有模型实验
-  eda/                    # EDA core/auxiliary 表格与运行清单
-  research/               # 时间窗/跨度计数、复现脚本、迁移记录与清单
-notebooks/                # EDA 入口、模块与依赖；保持原复现路径
-src/cs5228_rent/          # 后续可复用的数据处理、特征与评估代码
-tests/                    # 后续针对数据切分、连接和提交格式的必要检查
-proposal/                 # 英文 main.md、slides.md / slides.pdf 和构建清单
-  experiments/            # 供 proposal 使用的实验结果
-  figures/                # 供 proposal 使用的图表
-submissions/              # Kaggle 预测文件
-final report/             # 最终报告；以 latex/ 中的 IEEE 模板为写作入口
+```
+data/                      raw CSV files (read-only)
+  |  preprocessing stage 1   unify formats, clean the training rents      -> data_preprocess/stage1
+  |  preprocessing stage 2   join building facts and nearby facilities    -> data_preprocess/stage2
+  |  preprocessing stage 3   encode every feature as a number             -> data_preprocess/stage3
+  |  training stage 1        masked-field pretraining (rents not used)
+  |  training stage 2        fine-tuning on the rent
+  v  test                    predict the test set                         -> submissions/
 ```
 
-原始数据文件位于 `data/`，课程说明位于 `docs/`。课程说明是任务依据；工作指南中的模型和时间划分是团队建议，可根据实验结果调整。
+"Preprocessing stage" and "training stage" are different things: the first three steps prepare data, the next two train the model.
+
+## 1. Task and data
+
+| File | Rows | Content |
+|---|---:|---|
+| `train.csv` | 150,000 | rentals approved 2021-01 to 2025-03, with `MONTHLY_RENT` (300 to 7,600 SGD, mean 2,719) |
+| `test.csv` | 50,000 | rentals approved 2025-03 to 2026-07, rent to be predicted |
+| `auxiliary/sg-hdb-block.csv` | 9,464 | every HDB block: coordinates, highest floor, completion year, subzone, planning area, region |
+| `auxiliary/sg-mrt-stations.csv` | 243 | MRT stations with coordinates |
+| `auxiliary/sg-schools.csv` | 337 | schools with level and coordinates |
+| `auxiliary/sg-shopping-malls.csv` | 113 | malls with coordinates |
+
+Each rental has an approval month, town, block, street, flat type, flat model, floor area and lease start year. `FURNISHED` is always "yes" and `FEE` always 0. The COE and stock-price tables are not used.
+
+Two properties of the data shape the whole design:
+
+- **The test set lies in the future.** Almost all test months come after the last training month, so the model is validated on the last 12 months of the labelled data, never on a random sample.
+- **Many rentals have identical features but different rents.** 27% of the training rows share all their features (same block, flat type, model, area, lease year and month) with another row. These are different flats in the same block; floor level and condition are not in the data.
+
+## 2. Preprocessing
+
+`scripts/preprocess.py` builds `../data_preprocess` in three stages. Each stage writes CSV files into its own folder, so every step can be inspected, together with `schema.json` (column types) and `report.json` (what changed).
+
+### Stage 1: unify formats, clean the training rents
+
+| Step | What it does | Effect |
+|---|---|---|
+| Text normalization | Unicode NFKC, trim, lowercase, single spaces | `STREET`: 1,146 spellings become 576 in train (30,781 rows), 1,129 become 573 in test |
+| Flat type spelling | "4 room" is written "4-room" | 11 values become 6 (35,331 train rows) |
+| Missing markers | "NIL" postal codes and -1 building facts become empty | 285 postal codes; highest floor and completion year of 11 blocks |
+| Number formats | "$40,609" and "1,280" become numbers; 5-digit school postal codes are zero-padded | auxiliary tables |
+| Row identifier | `ROW_ID` = original row position | rows stay traceable through every stage |
+| Rent outliers removed | see below | 315 training rows removed |
+| Duplicate rents averaged | see below | 38,975 training rents replaced |
+
+**Rent outliers.** A rent is compared with its comparables: other rentals of the same unit (town, block, street, flat type, flat model, floor area, lease year) approved within 2 months. With at least 3 comparables, a rent is an outlier if it is more than twice or less than half their median and differs from it by at least 800 SGD. Within a unit the most extreme outlier is removed first and the medians are recomputed, so one outlier cannot make a normal rent look extreme. 37,435 rows could be judged; 315 were removed (303 far below the median, 12 far above), for example a 3-room flat rented at 500 SGD where comparable rentals cost 2,925.
+
+**Duplicate rents.** After outlier removal, rentals with identical features all receive the mean of their rents. 17,777 groups had differing rents. A model can only give identical inputs one prediction, and under squared error the best one is their mean, so this trains exactly like the separate rents but without contradictory labels. The original rent is kept in `MONTHLY_RENT_ORIGINAL`.
+
+Every change is listed for review in `stage1/cleaning/removed_outliers.csv` (with the comparables used) and `stage1/cleaning/rent_replaced.csv`. The training set has 149,685 rows afterwards. The test set is not changed.
+
+### Stage 2: building facts and nearby facilities
+
+Each rental is matched exactly on (town, block, street) to the HDB block table; all rows match. This adds 17 columns:
+
+| Source | Features |
+|---|---|
+| HDB block | `SUBZONE`, `PLANNING_AREA`, `REGION`, `LATITUDE`, `LONGITUDE`, `MAX_FLOOR`, `YEAR_COMPLETED` |
+| MRT stations | distance to the nearest station, mean distance to the nearest 3, stations within 500 m and within 1,000 m |
+| Schools | distance to the nearest primary school, to the nearest secondary school, primary schools within 1,000 m |
+| Malls | distance to the nearest mall, malls within 1,000 m and within 2,000 m |
+
+Distances are Haversine distances in metres. MRT stations count only from their first full month of operation, according to an explicit opening calendar (`preprocess/mrt_calendar.json`): 122 stations in 2021-01, 143 from 2025-03. A rental therefore never sees a station that had not opened yet. Schools (182 primary, 147 secondary) and malls (113) are a fixed snapshot.
+
+### Stage 3: every feature as a number
+
+The model receives 30 inputs per rental:
+
+| Group | Columns | Encoding |
+|---|---|---|
+| Category IDs (8) | `TOWN_ID` (26 values), `STREET_ID` (576), `BUILDING_ID` (9,464), `SUBZONE_ID` (156), `PLANNING_AREA_ID` (31), `REGION_ID` (5), `FLAT_MODEL_ID` (20), `FLAT_TYPE_ORD` (6, ordered by size) | integer 1..N, 0 = unknown. Vocabularies come from the HDB block table (flat model: from train), so they depend on neither rents nor the validation split |
+| Numbers (9) | `FLOOR_AREA_SQM`, `LEASE_COMMENCE_DATE`, `AGE_YEARS`, `MONTH_INDEX`, `LATITUDE`, `LONGITUDE`, `MAX_FLOOR`, `YEAR_COMPLETED`, `COMPLETION_AGE` | z-score |
+| Facility numbers (10) | the MRT, school and mall distances and counts | log1p, then z-score |
+| Calendar month (2) | `MONTH_SIN`, `MONTH_COS` | sine and cosine of the month of the year |
+| Flag (1) | `HDB_INFO_MISSING` | 1 if the building facts were imputed |
+
+- **Derived columns.** `MONTH_INDEX` counts months from 2021-01 (training 0 to 50, test 50 to 66). `AGE_YEARS` is the approval year minus the lease start year; `COMPLETION_AGE` is the approval year minus the completion year.
+- **Imputation.** 11 blocks (159 training rows, no test rows) lack highest floor and completion year. The completion year is set to the lease year minus 1 (the typical gap) and the highest floor to the median of the blocks on the same street.
+- **Standardization.** Means and standard deviations are computed once, on the features of the 149,685 training rows, and applied to both train and test. Rents are not involved.
+- **Dropped.** The constant `FURNISHED` and `FEE`, and the text columns now represented by IDs.
+
+`stage3/encoder.json` records every vocabulary, mean and standard deviation, so each value can be decoded.
+
+## 3. Model
+
+Each rental becomes a sequence of 30 vectors of width 768: one token per field plus a `[CLS]` token.
+
+| Token | Count | How it is built |
+|---|---:|---|
+| Category ID | 8 | embedding lookup (32 dimensions for the building, 16 for town and street, 8 for the others), then a linear layer to 768 |
+| Number | 19 | a small network per field: 1 -> 32 -> 768 with GELU |
+| Calendar month | 1 | linear layer on (sine, cosine): 2 -> 768 |
+| Flag | 1 | linear layer: 1 -> 768 |
+| `[CLS]` | 1 | learned vector, placed first |
+
+```
+30 inputs of one rental
+   -> 29 field tokens + [CLS]                    (30 x 768)
+   -> BERT encoder: 12 layers, hidden size 768, 12 attention heads, feed-forward 3072, dropout 0.1
+        training stage 1: every masked field token -> its own head -> reconstruct the field
+        training stage 2: [CLS] -> LayerNorm -> Linear 768-256 -> GELU -> Dropout -> Linear 256-1 -> rent
+```
+
+The encoder is the Hugging Face `BertModel`, randomly initialized (no text pretraining). Its position embeddings tell the model which field each token is, because fields always appear in the same order. The pretraining model has 93.9 million parameters, the regression model 86.2 million.
+
+## 4. Training
+
+### Two training stages
+
+1. **Pretraining (rents not used).** For each rental, every field group is masked with probability 0.15 (at least one group is always masked) and replaced by a learned mask vector. The model reconstructs the masked fields: cross-entropy for category IDs, squared error for numbers and the calendar month, binary cross-entropy for the flag; the three averages are summed. Fields that determine one another are masked together, so the task is not a lookup: `MONTH_INDEX` with the calendar month, and lease year, age, completion year and completion age.
+2. **Fine-tuning.** The pretrained encoder is loaded and the regression head predicts the standardized rent, (rent - mean) / standard deviation of the training rows, with squared-error loss. Predictions are converted back to SGD before scoring. An exponential moving average (EMA) of the weights is kept and used for validation and for the saved model.
+
+### Two rounds
+
+| | Round A (`select`) | Round B (`refit`) |
+|---|---|---|
+| Purpose | choose the number of epochs, report validation scores | train the model that predicts the test set |
+| Training rows | 2021-01 to 2024-03: 114,627 | all 149,685 |
+| Validation rows | 2024-04 to 2025-03: 35,058 | none |
+| Epochs | early stopping: keep the best validation epoch, stop after 5 epochs without improvement | exactly round A's best epoch of each stage |
+| Rent scaling | mean 2,597, standard deviation 709 (training months) | mean 2,722, standard deviation 727 (all rows) |
+
+Round A is scored by reconstruction loss on the validation months' features in stage 1 and by validation RMSE in stage 2. Round B starts from scratch: it pretrains and fine-tunes again on all rows and never looks at a validation score.
+
+### Configuration (`configs/bert.json`)
+
+| Setting | Training stage 1 | Training stage 2 |
+|---|---|---|
+| Maximum epochs | 40 | 60 |
+| Early-stopping patience (round A) | 5 epochs | 5 epochs |
+| Optimizer | AdamW, weight decay 0.01 | AdamW, weight decay 0.01 |
+| Peak learning rate | 1e-4 | 2e-5 for the encoder, 1e-4 for the regression head |
+| Schedule (per epoch) | linear warm-up over 2 epochs, then cosine decay to 10% at the last configured epoch | linear warm-up over 3 epochs, then cosine decay to 10% |
+| Batch size | 1,024 | 1,024 |
+| Gradient clipping | norm 1.0 | norm 1.0 |
+| Masking probability | 0.15 per field group | not used |
+| Weight EMA | not used | decay 0.995 |
+| Dropout | 0.1 | 0.1 |
+
+Seed 42, 32-bit floats, deterministic settings. The validation split is the last `validation_months` = 12 approval months.
+
+## 5. Results
+
+All figures are drawn by `scripts/plot_results.py` from the files the run recorded.
+
+### Training
+
+| | Round A | Round B |
+|---|---|---|
+| Stage 1 | 40 epochs, best epoch 40, validation reconstruction loss 0.237 (training 0.195) | 40 epochs, training loss 0.148 |
+| Stage 2 | 12 epochs, best epoch 7 | 7 epochs, training RMSE 426 |
+| Time | 1 h 50 min + 30 min | 2 h 05 min + 20 min |
+
+![Training curves](results/figures/fig1_training_curves.png)
+
+Pretraining improves until the last epoch. Fine-tuning reaches its best validation RMSE at epoch 7; after that the training error keeps falling while the validation error rises, so early stopping matters.
+
+### Validation (round A model, 35,058 rentals of 2024-04 to 2025-03)
+
+| Scored against | RMSE | MAE | Mean error |
+|---|---:|---:|---:|
+| Recorded rents (the way the test set is scored) | **468.3** | 344.8 | -6.7 |
+| Cleaned rents (used for early stopping) | 437.2 | 317.7 | -6.7 |
+| Reference: always predict the training mean, recorded rents | 842.5 | | |
+
+The two RMSE values are linked by a constant: rentals with identical features get the same prediction, so the spread of their recorded rents around their mean cannot be predicted by any model. That spread is 168 SGD over the validation rentals, and 468.3² = 437.2² + 168². In the result files the recorded-rent scores are called `original_rent`.
+
+| Month | Rentals | RMSE, recorded rents | RMSE, cleaned rents | Mean error |
+|---|---:|---:|---:|---:|
+| 2024-04 | 3,126 | 503.3 | 472.1 | +16.5 |
+| 2024-05 | 3,008 | 501.8 | 470.1 | +29.9 |
+| 2024-06 | 2,997 | 496.6 | 453.5 | +32.9 |
+| 2024-07 | 3,237 | 491.5 | 454.0 | -26.6 |
+| 2024-08 | 2,826 | 459.9 | 432.3 | +9.3 |
+| 2024-09 | 2,695 | 461.8 | 436.0 | +17.5 |
+| 2024-10 | 2,658 | 435.1 | 408.3 | -26.8 |
+| 2024-11 | 2,713 | 464.4 | 438.7 | -10.2 |
+| 2024-12 | 2,889 | 440.7 | 412.4 | -21.6 |
+| 2025-01 | 2,863 | 459.6 | 427.0 | -11.3 |
+| 2025-02 | 3,017 | 444.0 | 413.3 | -36.5 |
+| 2025-03 | 3,029 | 444.5 | 414.6 | -52.8 |
+
+![Validation by month](results/figures/fig2_validation_by_month.png)
+
+The error does not grow with the distance from the training period, but the predictions drift from slightly too high to about 50 SGD too low: rents kept rising slowly and a model trained up to 2024-03 does not follow. This is why round B retrains on all months before predicting the test set.
+
+![Predicted vs recorded rent](results/figures/fig3_predicted_vs_recorded.png)
+
+Predictions follow the recorded rents along the diagonal but cover a narrower range (1,382 to 5,425 SGD against 400 to 6,500): very cheap and very expensive rentals are pulled towards the typical rent of their kind of flat.
+
+### Test-set predictions (round B model)
+
+`submissions/submission_bert_two_stage.csv` holds 50,000 predictions between 1,333 and 5,452 SGD with a mean of 3,177.
+
+![Monthly mean rent](results/figures/fig4_monthly_mean_rent.png)
+
+The predicted level continues the last recorded months (3,163 in 2025-03). The model predicts an almost flat level for the 16 months ahead; it has no information about how rents will move after the training period.
+
+### What limits the score
+
+- **Identical features, different rents.** The data cannot tell apart flats of the same kind in the same block and month. Even a model that predicted every such group's mean rent exactly would have an RMSE of 168 SGD on the validation rentals.
+- **Outliers stay in the test set.** The validation rentals exclude 100 removed outliers; the test set still contains such rentals, so its RMSE is expected to be roughly 10 SGD higher than the validation RMSE for this reason alone.
+- **Forecasting.** The test months lie up to 16 months after the training data; the model can only carry the last known level forward.
+- **New buildings.** 102 test rentals are in 50 blocks without any training rental; the model has to rely on their location and flat attributes.
+
+## 6. Reproduce
+
+Run from this folder; the commands work in cmd and PowerShell.
+
+```
+.venv\Scripts\python.exe scripts\preprocess.py
+.venv\Scripts\python.exe -u scripts\train_stage1_pretrain.py
+.venv\Scripts\python.exe -u scripts\train_stage2_finetune.py
+.venv\Scripts\python.exe tests\test.py
+.venv\Scripts\python.exe scripts\plot_results.py
+```
+
+| Script | What it does | Writes |
+|---|---|---|
+| `scripts/preprocess.py` | the three preprocessing stages (`--stage 1`, `2` or `3` reruns one) | `../data_preprocess/stage1`, `stage2`, `stage3` |
+| `scripts/train_stage1_pretrain.py` | pretraining, round A then round B | `models/{select,refit}/pretrain/backbone.pt` |
+| `scripts/train_stage2_finetune.py` | fine-tuning, round A then round B, and round A's validation report | `models/{select,refit}/finetune/model.pt`, `results/validation_summary.json`, `results/validation_predictions.csv`, `results/refit.json` |
+| `tests/test.py` | predicts the test set with the round B model | `submissions/submission_bert_two_stage.csv` |
+| `scripts/plot_results.py` | the four figures above | `results/figures/` |
+
+- Both training scripts accept `--round select` or `--round refit` to run one round, and `--config`, `--model-dir`, `--results-dir` to keep a second experiment apart from this one. `tests/test.py` accepts `--model-dir`, `--round select` (predict with the round A model) and `--output`.
+- Training resumes from the last finished epoch if it is interrupted; a run interrupted and resumed gives the same result as an uninterrupted one.
+- `tests/test.py` refuses to overwrite an existing submission. In this folder the training scripts find the finished run and stop immediately; to train again from scratch, pass new `--model-dir` and `--results-dir` folders and a new `--output`.
+- `powershell -ExecutionPolicy Bypass -File run.ps1` runs the two training scripts and the test script in order.
+- Rerunning `tests/test.py` on the saved round B model reproduces the submission byte for byte, and rerunning the preprocessing reproduces `../data_preprocess`.
+
+A CUDA GPU is required; the batch of 1,024 needs about 20 GB of GPU memory with this configuration (the first run probes the memory and uses a smaller micro-batch with gradient accumulation if needed).
+
+### Environment
+
+Python 3.12, PyTorch 2.10.0 (CUDA 12.8), Transformers 4.57.6, NumPy 2.3.5, pandas 3.0.1; `requirements.lock.txt` lists every package. `scripts/plot_results.py` additionally needs matplotlib.
+
+```
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cu128
+.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+.venv\Scripts\python.exe -m pip install matplotlib
+```
+
+## 7. Folder layout
+
+| Path | Content |
+|---|---|
+| `preprocess/` | the three preprocessing stages, rent cleaning and the MRT opening calendar |
+| `bert_rent/` | data loading (`data.py`), model (`model.py`), training loop (`engine.py`), shared setup (`run.py`) |
+| `scripts/` | preprocessing, the two training stages, figures |
+| `tests/test.py` | test-set prediction |
+| `configs/bert.json` | the configuration of this run |
+| `models/` | `select/` (round A) and `refit/` (round B), each with `pretrain/` and `finetune/`: kept model, per-epoch `history.json`, `summary.json`, and `latest.pt` for resuming |
+| `results/` | `split.json`, `validation_summary.json`, `validation_predictions.csv`, `refit.json`, `environment.json`, `figures/`, `logs/` |
+| `submissions/` | the submission file |
+
+The Git repository holds the code, configuration, small result files and figures. The Python environment, `models/`, the submission CSV, `results/validation_predictions.csv` and `results/logs/` are not in it (large, per-row or machine-specific); the commands in section 6 produce them.

@@ -1,28 +1,16 @@
-.DS_Store
+# Environment and caches
 .venv/
 __pycache__/
-*.py[cod]
-*.egg-info/
-.pytest_cache/
-.ruff_cache/
-.ipynb_checkpoints/
+*.pyc
 
-# Private competition data and generated outputs; keep written records visible.
-data/**/*.csv
-data/**/*.parquet
-data/**/*.zip
+# Model checkpoints (several GB)
+models*/
+
+# Per-row prediction files and console logs stay local
 submissions/*.csv
-proposal/experiments/**/*.csv
-proposal/experiments/**/*.parquet
-proposal/experiments/**/*.pkl
-proposal/experiments/**/*.joblib
-proposal/experiments/**/*.png
-proposal/experiments/**/*.pdf
+results/validation_predictions.csv
+results/logs/
 
-# LaTeX build files; retain source .tex and chosen final PDFs.
-*.aux
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.synctex.gz
+# The figures shown in README.md are part of the repository
+!results/figures/
+!results/figures/*.png

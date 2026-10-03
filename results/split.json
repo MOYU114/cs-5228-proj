@@ -1,0 +1,20 @@
+{
+  "validation_months": 12,
+  "train": {
+    "rows": 114627,
+    "months": [
+      "2021-01",
+      "2024-03"
+    ]
+  },
+  "validation": {
+    "rows": 35058,
+    "months": [
+      "2024-04",
+      "2025-03"
+    ]
+  },
+  "refit": {
+    "rows": 149685
+  }
+}
