@@ -1,0 +1,402 @@
+{
+  "files": {
+    "sg-coe-prices.csv": {
+      "rows": 539,
+      "columns": 8,
+      "full_duplicate_excess": 0,
+      "null_cells": 0,
+      "column_names": [
+        "YEAR",
+        "CATEGORY",
+        "MONTH",
+        "ROUND",
+        "QUOTA_PREMIUM",
+        "PREVAILING_QUOTA_PREMIUM",
+        "QUOTA",
+        "BIDS_RECEIVED"
+      ],
+      "constant_fields": []
+    },
+    "sg-hdb-block.csv": {
+      "rows": 9464,
+      "columns": 11,
+      "full_duplicate_excess": 0,
+      "null_cells": 0,
+      "column_names": [
+        "TOWN",
+        "BLOCK",
+        "STREET",
+        "POSTAL_CODE",
+        "LATITUDE",
+        "LONGITUDE",
+        "MAX_FLOOR",
+        "YEAR_COMPLETED",
+        "SUBZONE",
+        "PLANNING_AREA",
+        "REGION"
+      ],
+      "constant_fields": []
+    },
+    "sg-mrt-stations.csv": {
+      "rows": 243,
+      "columns": 8,
+      "full_duplicate_excess": 0,
+      "null_cells": 0,
+      "column_names": [
+        "CODE",
+        "NAME",
+        "STATUS",
+        "LATITUDE",
+        "LONGITUDE",
+        "SUBZONE",
+        "PLANNING_AREA",
+        "REGION"
+      ],
+      "constant_fields": []
+    },
+    "sg-schools.csv": {
+      "rows": 337,
+      "columns": 14,
+      "full_duplicate_excess": 0,
+      "null_cells": 0,
+      "column_names": [
+        "NAME",
+        "URL",
+        "STREET",
+        "POSTAL_CODE",
+        "MRT_STATIONS",
+        "BUS_LINES",
+        "PLANNING_AREA",
+        "REGION",
+        "TYPE_CODE",
+        "NATRUE_CODE",
+        "SESSION_CODE",
+        "MAINLEVEL_CODE",
+        "LATITUDE",
+        "LONGITUDE"
+      ],
+      "constant_fields": []
+    },
+    "sg-shopping-malls.csv": {
+      "rows": 113,
+      "columns": 3,
+      "full_duplicate_excess": 0,
+      "null_cells": 0,
+      "column_names": [
+        "NAME",
+        "LATITUDE",
+        "LONGITUDE"
+      ],
+      "constant_fields": []
+    },
+    "sg-stock-prices.csv": {
+      "rows": 91642,
+      "columns": 9,
+      "full_duplicate_excess": 0,
+      "null_cells": 510,
+      "column_names": [
+        "NAME",
+        "SYMBOL",
+        "DATE",
+        "OPEN",
+        "HIGH",
+        "LOW",
+        "CLOSE",
+        "ADJUSTED_CLOSE",
+        "VOLUME"
+      ],
+      "constant_fields": []
+    }
+  },
+  "hdb": {
+    "key_table_stats": {
+      "raw_town_block_street": {
+        "unique_keys": 9464,
+        "one_to_many_keys": 0,
+        "rows_in_conflicts": 0
+      },
+      "normalized_town_block_street": {
+        "unique_keys": 9464,
+        "one_to_many_keys": 0,
+        "rows_in_conflicts": 0
+      },
+      "normalized_block_street": {
+        "unique_keys": 9464,
+        "one_to_many_keys": 0,
+        "rows_in_conflicts": 0
+      }
+    },
+    "match_rates": [
+      {
+        "split": "train",
+        "mode": "raw_town_block_street",
+        "rows": 150000,
+        "matched_rows": 119219,
+        "unique_match_rows": 119219,
+        "ambiguous_rows": 0,
+        "unmatched_rows": 30781,
+        "row_match_pct": 79.47933333333333,
+        "unique_keys": 17413,
+        "matched_unique_keys": 9344,
+        "unique_key_match_pct": 53.661057830356626
+      },
+      {
+        "split": "test",
+        "mode": "raw_town_block_street",
+        "rows": 50000,
+        "matched_rows": 39518,
+        "unique_match_rows": 39518,
+        "ambiguous_rows": 0,
+        "unmatched_rows": 10482,
+        "row_match_pct": 79.036,
+        "unique_keys": 14314,
+        "matched_unique_keys": 8674,
+        "unique_key_match_pct": 60.59801592846165
+      },
+      {
+        "split": "train",
+        "mode": "normalized_town_block_street",
+        "rows": 150000,
+        "matched_rows": 150000,
+        "unique_match_rows": 150000,
+        "ambiguous_rows": 0,
+        "unmatched_rows": 0,
+        "row_match_pct": 100.0,
+        "unique_keys": 9406,
+        "matched_unique_keys": 9406,
+        "unique_key_match_pct": 100.0
+      },
+      {
+        "split": "test",
+        "mode": "normalized_town_block_street",
+        "rows": 50000,
+        "matched_rows": 50000,
+        "unique_match_rows": 50000,
+        "ambiguous_rows": 0,
+        "unmatched_rows": 0,
+        "row_match_pct": 100.0,
+        "unique_keys": 8940,
+        "matched_unique_keys": 8940,
+        "unique_key_match_pct": 100.0
+      },
+      {
+        "split": "train",
+        "mode": "normalized_block_street",
+        "rows": 150000,
+        "matched_rows": 150000,
+        "unique_match_rows": 150000,
+        "ambiguous_rows": 0,
+        "unmatched_rows": 0,
+        "row_match_pct": 100.0,
+        "unique_keys": 9406,
+        "matched_unique_keys": 9406,
+        "unique_key_match_pct": 100.0
+      },
+      {
+        "split": "test",
+        "mode": "normalized_block_street",
+        "rows": 50000,
+        "matched_rows": 50000,
+        "unique_match_rows": 50000,
+        "ambiguous_rows": 0,
+        "unmatched_rows": 0,
+        "row_match_pct": 100.0,
+        "unique_keys": 8940,
+        "matched_unique_keys": 8940,
+        "unique_key_match_pct": 100.0
+      }
+    ],
+    "joined_quality": {
+      "train": {
+        "rows_joined": 150000,
+        "rows_postal_nil": 5259,
+        "rows_floor_minus_one": 159,
+        "rows_completion_minus_one": 159,
+        "rows_completion_after_approval_year": 0,
+        "rows_completion_after_lease_year": 422,
+        "buildings_completion_after_lease_year": 26,
+        "max_completion_minus_lease_years": 10
+      },
+      "test": {
+        "rows_joined": 50000,
+        "rows_postal_nil": 1739,
+        "rows_floor_minus_one": 0,
+        "rows_completion_minus_one": 0,
+        "rows_completion_after_approval_year": 0,
+        "rows_completion_after_lease_year": 152,
+        "buildings_completion_after_lease_year": 25,
+        "max_completion_minus_lease_years": 10
+      }
+    },
+    "postal_nil_rows": 285,
+    "floor_minus_one_rows": 11,
+    "completion_minus_one_rows": 11,
+    "valid_completion_min": 1949,
+    "valid_completion_max": 2021,
+    "valid_floor_min": 2,
+    "valid_floor_max": 50
+  },
+  "facilities": {
+    "sg-mrt-stations.csv": {
+      "rows": 243,
+      "unique_names": 192,
+      "duplicate_name_excess": 51,
+      "unique_coordinates": 192,
+      "duplicate_coordinate_excess": 51,
+      "invalid_global_coordinate_rows": 0,
+      "latitude_min": 1.265278,
+      "latitude_max": 1.449025,
+      "longitude_min": 103.636806,
+      "longitude_max": 104.003056,
+      "has_effective_date": false,
+      "status_counts": {
+        "open": 231,
+        "planned": 12
+      },
+      "unique_codes": 243,
+      "names_with_mixed_status": 11
+    },
+    "sg-schools.csv": {
+      "rows": 337,
+      "unique_names": 337,
+      "duplicate_name_excess": 0,
+      "unique_coordinates": 333,
+      "duplicate_coordinate_excess": 4,
+      "invalid_global_coordinate_rows": 0,
+      "latitude_min": 1.27495823622634,
+      "latitude_max": 1.45660782030102,
+      "longitude_min": 103.687310264575,
+      "longitude_max": 103.962807212116,
+      "has_effective_date": false,
+      "level_counts": {
+        "primary": 179,
+        "secondary (s1-s5)": 117,
+        "secondary (s1-s4)": 16,
+        "junior college": 10,
+        "mixed level (s1-jc2)": 10,
+        "mixed level (p1-s4)": 3,
+        "centralised institute": 1,
+        "mixed level (s1-s5, jc1-jc2)": 1
+      }
+    },
+    "sg-shopping-malls.csv": {
+      "rows": 113,
+      "unique_names": 113,
+      "duplicate_name_excess": 0,
+      "unique_coordinates": 113,
+      "duplicate_coordinate_excess": 0,
+      "invalid_global_coordinate_rows": 0,
+      "latitude_min": 1.26429316783973,
+      "latitude_max": 1.44819535371132,
+      "longitude_min": 103.697357496541,
+      "longitude_max": 103.98907755021,
+      "has_effective_date": false
+    }
+  },
+  "economy": {
+    "coe": {
+      "rows": 539,
+      "first_month": "2021-01",
+      "last_month": "2026-08",
+      "months": 68,
+      "categories": {
+        "a": 135,
+        "b": 135,
+        "c": 135,
+        "e": 134
+      },
+      "date_parse_failures": 0,
+      "duplicate_month_category_round_excess": 0,
+      "missing_round_cells_within_global_range": 5,
+      "numeric_parse": [
+        {
+          "field": "QUOTA_PREMIUM",
+          "parse_failures": 0,
+          "minimum": 35900.0,
+          "maximum": 158004.0,
+          "zero_count": 0,
+          "negative_count": 0
+        },
+        {
+          "field": "PREVAILING_QUOTA_PREMIUM",
+          "parse_failures": 0,
+          "minimum": 0.0,
+          "maximum": 138094.0,
+          "zero_count": 134,
+          "negative_count": 0
+        },
+        {
+          "field": "QUOTA",
+          "parse_failures": 0,
+          "minimum": 43.0,
+          "maximum": 1306.0,
+          "zero_count": 0,
+          "negative_count": 0
+        },
+        {
+          "field": "BIDS_RECEIVED",
+          "parse_failures": 0,
+          "minimum": 65.0,
+          "maximum": 2572.0,
+          "zero_count": 0,
+          "negative_count": 0
+        }
+      ],
+      "zero_prevailing_by_category": {
+        "e": 134
+      }
+    },
+    "stock": {
+      "rows": 91642,
+      "symbols": 77,
+      "first_date": "2021-01-04",
+      "last_date": "2026-07-30",
+      "months": 67,
+      "date_parse_failures": 0,
+      "duplicate_symbol_date_excess": 0,
+      "missing_price_rows": 85,
+      "zero_volume_rows": 2623,
+      "high_below_open_close_or_low": 46,
+      "low_above_open_close_or_high": 26,
+      "ohlc_inconsistent_rows": 72,
+      "symbols_starting_after_train_end": 7,
+      "symbols_with_all_global_months": 53,
+      "monthly_symbol_min": 53,
+      "monthly_symbol_max": 77,
+      "missing_price_dates": {
+        "2026-05-01": 43,
+        "2026-06-01": 42
+      }
+    },
+    "temporal_relation": {
+      "coe": {
+        "rows_after_train_end_month": 131,
+        "rows_after_test_end_month": 3,
+        "train_missing_months": [],
+        "test_missing_months": []
+      },
+      "stock": {
+        "rows_after_train_end_month": 25126,
+        "rows_after_test_end_month": 0,
+        "train_missing_months": [],
+        "test_missing_months": []
+      }
+    }
+  },
+  "normalization": "Unicode NFKC + strip + lower + collapse whitespace; no fuzzy rules",
+  "versions": {
+    "pandas": "2.2.3",
+    "numpy": "2.3.5"
+  },
+  "input_sha256": {
+    "data/auxiliary/sg-coe-prices.csv": "e32fccd39da32780b6b7f35d069c813ed3edb0c110ea60761656bcee58d501a5",
+    "data/auxiliary/sg-hdb-block.csv": "e6ccc60c1f901f8f476eb6fe14c07ef5941d2afd06a081a1e4c00f717da27f83",
+    "data/auxiliary/sg-mrt-stations.csv": "899460b39fb251bd6883fffc9e6a772081f8e5217a657550afc3c49cfdcd3227",
+    "data/auxiliary/sg-schools.csv": "118c7ce8d96bbc934bd53655e73e6d0848c27853a625394ecc6a67a5af54f192",
+    "data/auxiliary/sg-shopping-malls.csv": "00e05b0176ac412695fc4ce1fc5a5338a1993593ffaffe26156dc2ea04ddf2c8",
+    "data/auxiliary/sg-stock-prices.csv": "c52fef9f33cfcb11285e2b9546124e02f32488e563af44e9fb3a505d10e2edff",
+    "data/train.csv": "6d7a417de72112361f8353659ba6fe44a442b07465b488aff1b03f7ec1ea3ba6",
+    "data/test.csv": "dfc407406d957bbf7c2f005e5d9852b1bfc6546cd4186f07e6824d8e03e64cfc"
+  },
+  "source_hashes_unchanged": true
+}

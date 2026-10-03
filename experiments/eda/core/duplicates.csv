@@ -1,0 +1,17 @@
+split,form,definition,unique_groups,repeated_groups,rows_in_repeated_groups,excess_rows,max_multiplicity
+train,raw,all_available_fields,149575,411,836,425,5
+train,raw,X_only,134453,13434,28981,15547,9
+train,raw,block,17413,15340,147927,132587,117
+train,raw,block_month,129625,17265,37640,20375,9
+train,normalized,all_available_fields,149359,620,1261,641,5
+train,normalized,X_only,128026,18230,40204,21974,10
+train,normalized,block,9406,9159,149753,140594,136
+train,normalized,block_month,121322,23197,51875,28678,10
+test,raw,all_available_fields,44492,4591,10099,5508,8
+test,raw,X_only,44492,4591,10099,5508,8
+test,raw,block,14314,10041,45727,35686,42
+test,raw,block_month,42849,5840,12991,7151,10
+test,normalized,all_available_fields,42236,6209,13973,7764,9
+test,normalized,X_only,42236,6209,13973,7764,9
+test,normalized,block,8940,7983,49043,41060,55
+test,normalized,block_month,39972,7806,17834,10028,14

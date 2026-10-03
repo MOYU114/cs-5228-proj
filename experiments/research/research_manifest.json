@@ -1,0 +1,216 @@
+{
+  "date": "2026-09-26",
+  "scope": "Evidence-based RMSE research priorities and artifact organization only; no model training or predictions",
+  "hardware_confirmed_by_user": "CPU or GPU allowed; low cost is a soft preference, not a requirement",
+  "method_recency_confirmed_by_user": "Prefer modern methods; all five main candidates are 2025–2026",
+  "hardware_and_schedule_unconfirmed": [
+    "GPU model and VRAM",
+    "CPU/RAM",
+    "cloud budget",
+    "team weekly hours",
+    "library familiarity",
+    "final report deadline"
+  ],
+  "known_milestone": "PROGRESS_PLAN.md suggests progress report on 2026-10-04",
+  "research_papers_cited_in_main_report": 9,
+  "candidate_pipelines": 5,
+  "candidate_ids": {
+    "N1": "TabM (ICLR 2025)",
+    "N2": "TabICLv2 (ICML 2026)",
+    "N3": "ModernNCA (ICLR 2025)",
+    "N4": "TabPFN-3.5 (September 2026 technical report)",
+    "N5": "TabM with Feature-aware Temporal Modulation (NeurIPS 2025)"
+  },
+  "feasibility_order": [
+    "N1",
+    "N5",
+    "N2",
+    "N4",
+    "N3"
+  ],
+  "order_is_not_accuracy_ranking": true,
+  "window_count_command": "python3 experiments/research/validation_windows.py",
+  "window_count_dependencies": "Python 3 standard library (csv, pathlib)",
+  "verification_python": "3.9.6",
+  "source_eda_manifest": "experiments/eda/run_manifest.json",
+  "preservation_checks_against_eda_manifest": {
+    "input_sha256": {
+      "data/auxiliary/sg-coe-prices.csv": true,
+      "data/auxiliary/sg-hdb-block.csv": true,
+      "data/auxiliary/sg-mrt-stations.csv": true,
+      "data/auxiliary/sg-schools.csv": true,
+      "data/auxiliary/sg-shopping-malls.csv": true,
+      "data/auxiliary/sg-stock-prices.csv": true,
+      "data/test.csv": true,
+      "data/train.csv": true
+    },
+    "protected_sha256": {
+      "proposal/main.md": true,
+      "proposal/slides.md": true,
+      "final report/.DS_Store": true,
+      "final report/README.md": true,
+      "final report/latex/IEEEtran.cls": true,
+      "final report/latex/cs5228-template.tex": true,
+      "final report/latex/fig1.png": true,
+      "final report/word/cs5228-template.docx": true
+    },
+    "code_sha256": {
+      "notebooks/eda_auxiliary.py": true,
+      "notebooks/eda_core.py": true,
+      "notebooks/eda_figures.py": true,
+      "notebooks/eda_report.py": true,
+      "notebooks/run_eda.py": true
+    }
+  },
+  "research_file_sha256": {
+    "README.md": "4763546fa786bd37aaad222d90e0ff04cc7711cd9c7d181eca1a2c8c85219a0e",
+    "docs/research/IDEA_EVALUATION.md": "4f664c3b49cf3124cdda6f88e3780f0ed760c193e953fb2a71b462b47b2d9120",
+    "docs/research/METHOD_RESEARCH.md": "81b4e33c29bcada52851111644fe6571bb74e99d6cd776b63103529a2dacda22",
+    "docs/research/PRIORITY_PLAN.md": "4bc2fb68ecacb4ffc114376118d892be6feaa8f8b850e189726e27f3c9c2c6e4",
+    "docs/research/README.md": "e7d4319b409014887e74e9f658ccf306b8f5cd69e9fb415d254d3e1b23187ea5",
+    "docs/research/RESEARCH_BRIEF.md": "1f0f498b844d3bea692dabe8f4e89f38ced3153a155b50b8dfb357e4b49b4d96",
+    "docs/research/archive/README.md": "2a6afa65b64ba3e40e179c92f21df5e9d9f9df37feae8d2a7252347112b75833",
+    "docs/research/archive/cpu/IDEA_EVALUATION_CPU_INITIAL.md": "516d5eeb216bad643ae72ae519a92801653a80b3504ef2338609bb4e84d285e8",
+    "docs/research/archive/cpu/METHOD_RESEARCH_CPU_INITIAL.md": "89055cee7c02b16cacb31bd542260295676bf26c14172798ef9c7e791bba63ac",
+    "docs/research/archive/cpu/application_validation_evidence.md": "11c5a706ff85fa35b0f0534677d0d5f9799bb85bba66620fc1ee64847cfd9582",
+    "docs/research/archive/cpu/critics_evidence.md": "f7f20e2c90e08edcedca9e0d8857f4dd7122e2f2814a2d6a5f4ee5176f429c21",
+    "docs/research/archive/cpu/structure_evidence.md": "ed92437dbee0cb6164d2ed2cf68bd05eb3fb7b98cfb6e2c01b0f76b4d9e0bcd5",
+    "docs/research/archive/cpu/tree_evidence.md": "6a4f31ea4405630c81c70983af6a63cc83d092842d0ce13fd7a8f963f27c9b9c",
+    "docs/research/archive/gpu/GPU_REVISION_NOTES.md": "4674f433de1919278b743edb883a348a41a32a43f1cadaf53e409e98d8ec9b7e",
+    "docs/research/archive/gpu/gpu_feasibility_evidence.md": "65fa8d53a634175096f4f57ceaeee1564f89715a1837fa3d6dd3f4826c2d751b",
+    "docs/research/archive/gpu/gpu_neural_evidence.md": "841206fc8406a84a135a58edd39f539faefed357e5cf6401a356556d950ac759",
+    "docs/research/evidence/modern_foundation_evidence.md": "5c2c90335ab0f535be7ee1048e717762a4f6110c63e675b78afe55f15afb6bd1",
+    "docs/research/evidence/modern_retrieval_evidence.md": "e23d693a678f9d4d5e07c7b813277b4fd6369a666a17a4c91fc2225f6c929d90",
+    "docs/research/evidence/modern_temporal_evidence.md": "963b7526b558a8ded62f8fcd5d48bf92e8d0fd62aa1ffd4cb530006c6a790ff0",
+    "experiments/research/README.md": "17791c267cd7086ec40a83941a4fad0f5c58ef998682c3189ac068f23790d5ac",
+    "experiments/research/file_moves.json": "273a4c4bd5a79274af89ba7f5762b262399e7d0c26c24db716b7b8bd30ced1ab",
+    "experiments/research/priority_profile.json": "80217f1d12b6de0a23a7044972ff9d5c54d0070404d63bc99f2330a4892ef3c1",
+    "experiments/research/priority_profile.py": "8f6399cdf09f32fa20ea36d5dc2af172a1cc12821f2476831b1b2688dfd0adc9",
+    "experiments/research/validation_windows.csv": "cd65f21ab3be8c708449adc8bc9cc1232a0f83f30a0eaa1856c7df3904101368",
+    "experiments/research/validation_windows.py": "75c7e7aa90c24812aa1d5a7260a56be4378b689540ceb68d6a10b92ac9659e40"
+  },
+  "validation_windows": [
+    {
+      "window": "V1_recent_development",
+      "train_start": "2021-01",
+      "train_end": "2024-03",
+      "train_months": "39",
+      "train_rows": "114842",
+      "validation_start": "2024-04",
+      "validation_end": "2024-09",
+      "validation_months": "6",
+      "validation_rows": "17960"
+    },
+    {
+      "window": "V2_recent_confirmation",
+      "train_start": "2021-01",
+      "train_end": "2024-09",
+      "train_months": "45",
+      "train_rows": "132802",
+      "validation_start": "2024-10",
+      "validation_end": "2025-03",
+      "validation_months": "6",
+      "validation_rows": "17198"
+    },
+    {
+      "window": "VL_long_horizon",
+      "train_start": "2021-01",
+      "train_end": "2023-05",
+      "train_months": "29",
+      "train_rows": "84902",
+      "validation_start": "2023-06",
+      "validation_end": "2024-09",
+      "validation_months": "16",
+      "validation_rows": "47900"
+    }
+  ],
+  "audit": {
+    "local_markdown_links_valid": true,
+    "local_links_checked": 108,
+    "modern_candidate_count_valid": true,
+    "references_numbered_1_to_9": true,
+    "independent_reviews": [
+      "RMSE-oriented five-method priorities",
+      "metric, temporal validation and nested ensemble protocol",
+      "previous literature and implementation reviews retained"
+    ],
+    "migration_sources_checked": true
+  },
+  "notes": [
+    "No local model RMSE, runtime or VRAM results exist.",
+    "All proposed gains and model costs remain hypotheses.",
+    "No test targets or future realized macroeconomic observations were used.",
+    "Date shares describe the known input distribution; they are not fitted model or metric weights.",
+    "No model dependencies or weights were installed or downloaded.",
+    "Classical methods remain strong controls; their validation results may supersede the modern-method priority.",
+    "V1 and VL overlap; V2 was observed during EDA and is not a fully blind test.",
+    "No Git commit or push was performed."
+  ],
+  "entry_point": "README.md",
+  "priority_plan": "docs/research/PRIORITY_PLAN.md",
+  "main_research_report": "docs/research/METHOD_RESEARCH.md",
+  "idea_evaluation": "docs/research/IDEA_EVALUATION.md",
+  "previous_feasibility_order": [
+    "N1",
+    "N2",
+    "N5",
+    "N4",
+    "N3"
+  ],
+  "rmse_oriented_attempt_order": [
+    "N1",
+    "N5",
+    "N2",
+    "N4",
+    "N3"
+  ],
+  "ranking_basis": "Qualitative, risk-adjusted experiment priorities; not measured RMSE or a leaderboard promise",
+  "preservation_checks_eda_deliverables": {
+    "docs/EDA_REPORT.md": true,
+    "notebooks/run_eda.py": true,
+    "notebooks/.gitkeep": true,
+    "notebooks/README_EDA.md": true,
+    "notebooks/eda_core.py": true,
+    "notebooks/eda_report.py": true,
+    "notebooks/eda_figures.py": true,
+    "notebooks/requirements-eda.txt": true,
+    "notebooks/eda_auxiliary.py": true,
+    "proposal/figures/eda_rent_by_flat_type.png": true,
+    "proposal/figures/eda_rent_area_age.png": true,
+    "proposal/figures/eda_rent_distribution.png": true,
+    "proposal/figures/eda_month_coverage_and_rent.png": true,
+    "proposal/figures/eda_rent_by_town.png": true,
+    "proposal/figures/eda_numeric_shift.png": true,
+    "proposal/figures/eda_categorical_shift.png": true
+  },
+  "date_profile_command": "python3 experiments/research/priority_profile.py",
+  "date_profile_dependencies": "Python 3 standard library (csv, pathlib, json, hashlib)",
+  "test_horizon_bands": [
+    {
+      "band": "h0",
+      "rows": 380,
+      "share_percent": 0.76
+    },
+    {
+      "band": "h1_6",
+      "rows": 19386,
+      "share_percent": 38.772
+    },
+    {
+      "band": "h7_16",
+      "rows": 30234,
+      "share_percent": 60.468
+    }
+  ],
+  "organization": {
+    "moved_documents": 13,
+    "move_manifest": "experiments/research/file_moves.json",
+    "current": "docs/research",
+    "evidence": "docs/research/evidence",
+    "archive": "docs/research/archive",
+    "code_and_eda_outputs_kept_in_place": true
+  },
+  "metric_provenance": "RMSE recorded in docs/PROJECT_TASK_GUIDE.md; current Kaggle page access unsuccessful; public/private split unverified",
+  "snapshot_semantics": "Historical snapshot at the end of the research-only stage. Preservation checks and hashes apply to that stage, before the later authorized English proposal and slides update.",
+  "later_authorized_document_update": "proposal/build_manifest.json"
+}

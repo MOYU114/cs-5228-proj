@@ -1,0 +1,115 @@
+{
+  "source": "experiments/eda/core/monthly_counts.csv",
+  "source_sha256": "a097d53c8a8d3e589345d63ecf45f278e42e25af82f1af8693d68ce42e8fc757",
+  "scope": "Date coverage only; no target access, fitting, predictions or score weighting",
+  "train_rows": 150000,
+  "train_months": 51,
+  "train_cutoff": "2025-03",
+  "test_rows": 50000,
+  "test_months": 17,
+  "max_horizon_months": 16,
+  "test_horizon_bands": [
+    {
+      "band": "h0",
+      "rows": 380,
+      "share_percent": 0.76
+    },
+    {
+      "band": "h1_6",
+      "rows": 19386,
+      "share_percent": 38.772
+    },
+    {
+      "band": "h7_16",
+      "rows": 30234,
+      "share_percent": 60.468
+    }
+  ],
+  "test_horizons": [
+    {
+      "month": "2025-03",
+      "horizon": 0,
+      "rows": 380
+    },
+    {
+      "month": "2025-04",
+      "horizon": 1,
+      "rows": 3112
+    },
+    {
+      "month": "2025-05",
+      "horizon": 2,
+      "rows": 3312
+    },
+    {
+      "month": "2025-06",
+      "horizon": 3,
+      "rows": 3296
+    },
+    {
+      "month": "2025-07",
+      "horizon": 4,
+      "rows": 3567
+    },
+    {
+      "month": "2025-08",
+      "horizon": 5,
+      "rows": 3096
+    },
+    {
+      "month": "2025-09",
+      "horizon": 6,
+      "rows": 3003
+    },
+    {
+      "month": "2025-10",
+      "horizon": 7,
+      "rows": 2983
+    },
+    {
+      "month": "2025-11",
+      "horizon": 8,
+      "rows": 2972
+    },
+    {
+      "month": "2025-12",
+      "horizon": 9,
+      "rows": 3044
+    },
+    {
+      "month": "2026-01",
+      "horizon": 10,
+      "rows": 3158
+    },
+    {
+      "month": "2026-02",
+      "horizon": 11,
+      "rows": 2555
+    },
+    {
+      "month": "2026-03",
+      "horizon": 12,
+      "rows": 3378
+    },
+    {
+      "month": "2026-04",
+      "horizon": 13,
+      "rows": 3033
+    },
+    {
+      "month": "2026-05",
+      "horizon": 14,
+      "rows": 3037
+    },
+    {
+      "month": "2026-06",
+      "horizon": 15,
+      "rows": 3040
+    },
+    {
+      "month": "2026-07",
+      "horizon": 16,
+      "rows": 3034
+    }
+  ]
+}

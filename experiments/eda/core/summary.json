@@ -1,0 +1,141 @@
+{
+  "rows": {
+    "train": 150000,
+    "test": 50000
+  },
+  "columns": {
+    "train": 11,
+    "test": 10
+  },
+  "dates": {
+    "train": {
+      "min": "2021-01",
+      "max": "2025-03",
+      "months": 51
+    },
+    "test": {
+      "min": "2025-03",
+      "max": "2026-07",
+      "months": 17
+    }
+  },
+  "rent": {
+    "count": 150000.0,
+    "mean": 2719.0368933333334,
+    "std": 749.7310963563276,
+    "min": 300.0,
+    "1%": 1300.0,
+    "5%": 1650.0,
+    "25%": 2100.0,
+    "50%": 2700.0,
+    "75%": 3200.0,
+    "95%": 4000.0,
+    "99%": 4600.0,
+    "max": 7600.0,
+    "skew": 0.38640245394789174,
+    "multiple_50_fraction": 0.9871933333333334,
+    "pearson_area": 0.3292727094154649,
+    "spearman_area": 0.31770262255974446,
+    "pearson_age": -0.1781406247558509
+  },
+  "block_coverage": [
+    {
+      "reference": "all_train",
+      "train_unique_blocks": 9406,
+      "test_unique_blocks": 8940,
+      "shared_unique_blocks": 8890,
+      "test_seen_rows": 49898,
+      "test_new_rows": 102,
+      "test_new_blocks": 50
+    },
+    {
+      "reference": "recent_train_2024-10_to_2025-03",
+      "train_unique_blocks": 7060,
+      "test_unique_blocks": 8940,
+      "shared_unique_blocks": 6846,
+      "test_seen_rows": 42991,
+      "test_new_rows": 7009,
+      "test_new_blocks": 2094
+    }
+  ],
+  "overlap_months": [
+    "2025-03"
+  ],
+  "test_rows_overlapping_months": 380,
+  "test_rows_after_train_max": 49620,
+  "test_rows_identical_X_in_train": 114,
+  "identical_X_multi_target_groups": 17900,
+  "identical_X_multi_target_rows": 39540,
+  "horizon_months": 16,
+  "suggested_window_counts": {
+    "fit_rows": 132802,
+    "holdout_rows": 17198,
+    "holdout_new_block_rows": 55
+  },
+  "normalization": {
+    "train": {
+      "TOWN": {
+        "raw_unique": 26,
+        "normalized_unique": 26,
+        "changed_rows": 0
+      },
+      "BLOCK": {
+        "raw_unique": 2720,
+        "normalized_unique": 2720,
+        "changed_rows": 0
+      },
+      "STREET": {
+        "raw_unique": 1146,
+        "normalized_unique": 576,
+        "changed_rows": 30781
+      },
+      "FLAT_TYPE": {
+        "raw_unique": 11,
+        "normalized_unique": 6,
+        "changed_rows": 35331
+      },
+      "FLAT_MODEL": {
+        "raw_unique": 20,
+        "normalized_unique": 20,
+        "changed_rows": 0
+      },
+      "FURNISHED": {
+        "raw_unique": 1,
+        "normalized_unique": 1,
+        "changed_rows": 0
+      }
+    },
+    "test": {
+      "TOWN": {
+        "raw_unique": 26,
+        "normalized_unique": 26,
+        "changed_rows": 0
+      },
+      "BLOCK": {
+        "raw_unique": 2660,
+        "normalized_unique": 2660,
+        "changed_rows": 0
+      },
+      "STREET": {
+        "raw_unique": 1129,
+        "normalized_unique": 573,
+        "changed_rows": 10482
+      },
+      "FLAT_TYPE": {
+        "raw_unique": 6,
+        "normalized_unique": 6,
+        "changed_rows": 0
+      },
+      "FLAT_MODEL": {
+        "raw_unique": 19,
+        "normalized_unique": 19,
+        "changed_rows": 0
+      },
+      "FURNISHED": {
+        "raw_unique": 1,
+        "normalized_unique": 1,
+        "changed_rows": 0
+      }
+    }
+  }
+}

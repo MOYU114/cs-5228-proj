@@ -1,0 +1,39 @@
+{
+  "python": "3.12.14",
+  "executable": "/Users/moyu114/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "packages": {
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "matplotlib": "3.10.6"
+  },
+  "input_sha256": {
+    "data/auxiliary/sg-coe-prices.csv": "e32fccd39da32780b6b7f35d069c813ed3edb0c110ea60761656bcee58d501a5",
+    "data/auxiliary/sg-hdb-block.csv": "e6ccc60c1f901f8f476eb6fe14c07ef5941d2afd06a081a1e4c00f717da27f83",
+    "data/auxiliary/sg-mrt-stations.csv": "899460b39fb251bd6883fffc9e6a772081f8e5217a657550afc3c49cfdcd3227",
+    "data/auxiliary/sg-schools.csv": "118c7ce8d96bbc934bd53655e73e6d0848c27853a625394ecc6a67a5af54f192",
+    "data/auxiliary/sg-shopping-malls.csv": "00e05b0176ac412695fc4ce1fc5a5338a1993593ffaffe26156dc2ea04ddf2c8",
+    "data/auxiliary/sg-stock-prices.csv": "c52fef9f33cfcb11285e2b9546124e02f32488e563af44e9fb3a505d10e2edff",
+    "data/test.csv": "dfc407406d957bbf7c2f005e5d9852b1bfc6546cd4186f07e6824d8e03e64cfc",
+    "data/train.csv": "6d7a417de72112361f8353659ba6fe44a442b07465b488aff1b03f7ec1ea3ba6"
+  },
+  "protected_unchanged": true,
+  "protected_sha256": {
+    "proposal/main.md": "96d1a0c4cae83a8a6800e147fafaf2c376de9ae93f7ce7d9ae712b8fe8104c36",
+    "proposal/slides.md": "eb67457ebd21fd76f3b540c4943dcccc1a231603e503298dfa9518376433cf9f",
+    "final report/.DS_Store": "016dbfa89470433b55c3b92646e3be92762a48cd420b422b0cdd121d162fe1c6",
+    "final report/README.md": "65d73eea63dde813eb283d57ac8340e599c0c532413a3f3edcd58cb0ef41733d",
+    "final report/latex/IEEEtran.cls": "c972aca108fda004c3514d63658e02816da2e54d9a1451e870b9bd970e003f55",
+    "final report/latex/cs5228-template.tex": "1668da3a358cc64cde4a6d6c207dd822b1b037932478b33b93bcadb450edbb6b",
+    "final report/latex/fig1.png": "db271171f451b1585286b0fe118ac924dd1de227bb587121c408b34f1cb00846",
+    "final report/word/cs5228-template.docx": "9d0153f7121508f585eff77c6fc112234a9d289c0390bf54a5296d15d01b04d3"
+  },
+  "code_sha256": {
+    "notebooks/eda_auxiliary.py": "b15e6f2f7d45600ac05ed33f0a38eb0d309778a820fd6e3269c35e91493a2086",
+    "notebooks/eda_core.py": "9b523bcdb93c33ce9f0f27e52ef197fa64ed7856e4a98f5b62c4b74f9b11108c",
+    "notebooks/eda_figures.py": "fd1a0c7e0b918f80aab56ea7297c6b89f1e43df7e7adfad8d82c227c4e773367",
+    "notebooks/eda_report.py": "4d63f096f747704cb1614e70cd31fb4a1144ddf86825de996ccdb840b85b7121",
+    "notebooks/run_eda.py": "eb175089fc611140c3d1e4af554861a8cf726482bf6a09c694d0800f59ed57c4"
+  },
+  "scope": "Stage 1 only; test has no target; no model fitting, predictions or submissions",
+  "command": "python notebooks/run_eda.py"
+}

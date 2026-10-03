@@ -2,21 +2,23 @@
 
 This project predicts the monthly rent of Singapore HDB flats (CS5228 project, regression, scored by RMSE). Every rental record is turned into a short sequence of field tokens and fed to a BERT encoder that is first pretrained to reconstruct masked fields and then fine-tuned to predict the rent.
 
+Project documents are available in this working tree: [proposal text](proposal/main.md), [progress slides (PDF)](proposal/slides.pdf), [editable slides](proposal/slides.md), [14-slide plan and responsibilities](proposal/SLIDE_PLAN.md), [EDA report](docs/EDA_REPORT.md), and [method research index](docs/research/README.md). These restored documents retain the earlier proposal draft; the BERT results below have not yet been incorporated into that draft.
+
 | | |
 |---|---|
-| Submission | `submissions/submission_bert_two_stage.csv` (50,000 predictions) |
+| Submission | `results/submission_bert_two_stage.csv` (50,000 predictions) |
 | Model | 12-layer BERT encoder over 29 field tokens, 86 million parameters |
 | Validation RMSE | **468.3 SGD** on the last 12 months of labelled data (35,058 rentals); always predicting the training mean gives 842.5 |
 | Training time | about 4 h 45 min on one RTX 5090 Laptop GPU |
 
 ```
-data/                      raw CSV files (read-only)
-  |  preprocessing stage 1   unify formats, clean the training rents      -> data_preprocess/stage1
-  |  preprocessing stage 2   join building facts and nearby facilities    -> data_preprocess/stage2
-  |  preprocessing stage 3   encode every feature as a number             -> data_preprocess/stage3
+../data/                   raw CSV files (read-only)
+  |  preprocessing stage 1   unify formats, clean the training rents      -> ../data_preprocess/stage1
+  |  preprocessing stage 2   join building facts and nearby facilities    -> ../data_preprocess/stage2
+  |  preprocessing stage 3   encode every feature as a number             -> ../data_preprocess/stage3
   |  training stage 1        masked-field pretraining (rents not used)
   |  training stage 2        fine-tuning on the rent
-  v  test                    predict the test set                         -> submissions/
+  v  test                    predict the test set                         -> results/
 ```
 
 "Preprocessing stage" and "training stage" are different things: the first three steps prepare data, the next two train the model.
@@ -41,7 +43,7 @@ Two properties of the data shape the whole design:
 
 ## 2. Preprocessing
 
-`scripts/preprocess.py` builds `../data_preprocess` in three stages. Each stage writes CSV files into its own folder, so every step can be inspected, together with `schema.json` (column types) and `report.json` (what changed).
+`src/scripts/preprocess.py` builds `../data_preprocess` in three stages. Each stage writes CSV files into its own folder, so every step can be inspected, together with `schema.json` (column types) and `report.json` (what changed).
 
 ### Stage 1: unify formats, clean the training rents
 
@@ -72,7 +74,7 @@ Each rental is matched exactly on (town, block, street) to the HDB block table; 
 | Schools | distance to the nearest primary school, to the nearest secondary school, primary schools within 1,000 m |
 | Malls | distance to the nearest mall, malls within 1,000 m and within 2,000 m |
 
-Distances are Haversine distances in metres. MRT stations count only from their first full month of operation, according to an explicit opening calendar (`preprocess/mrt_calendar.json`): 122 stations in 2021-01, 143 from 2025-03. A rental therefore never sees a station that had not opened yet. Schools (182 primary, 147 secondary) and malls (113) are a fixed snapshot.
+Distances are Haversine distances in metres. MRT stations count only from their first full month of operation, according to an explicit opening calendar (`src/preprocess/mrt_calendar.json`): 122 stations in 2021-01, 143 from 2025-03. A rental therefore never sees a station that had not opened yet. Schools (182 primary, 147 secondary) and malls (113) are a fixed snapshot.
 
 ### Stage 3: every feature as a number
 
@@ -153,7 +155,7 @@ Seed 42, 32-bit floats, deterministic settings. The validation split is the last
 
 ## 5. Results
 
-All figures are drawn by `scripts/plot_results.py` from the files the run recorded.
+All figures are drawn by `src/scripts/plot_results.py` from the files the run recorded.
 
 ### Training
 
@@ -202,7 +204,7 @@ Predictions follow the recorded rents along the diagonal but cover a narrower ra
 
 ### Test-set predictions (round B model)
 
-`submissions/submission_bert_two_stage.csv` holds 50,000 predictions between 1,333 and 5,452 SGD with a mean of 3,177.
+`results/submission_bert_two_stage.csv` holds 50,000 predictions between 1,333 and 5,452 SGD with a mean of 3,177.
 
 ![Monthly mean rent](results/figures/fig4_monthly_mean_rent.png)
 
@@ -217,27 +219,31 @@ The predicted level continues the last recorded months (3,163 in 2025-03). The m
 
 ## 6. Reproduce
 
+The defaults retain the original author's workspace layout: this Git repository, `data/` and `data_preprocess/` are siblings. Raw inputs are read from `../data`, including `train.csv`, `test.csv`, `auxiliary/` and the official `example-submission.csv`. Preprocessing writes `../data_preprocess/stage1`, `stage2` and `stage3`. Configuration paths such as `data_dir` are resolved relative to the repository root, regardless of the current working directory. A repository-local `data/` copy is not selected automatically.
+
+Model checkpoints, per-row predictions and training histories are not included in Git. Full training or prediction requires the external input files and the dependencies below; reproducing prediction from the saved model also requires the author's completed `models/` directory. The recorded result JSON and figures were preserved during the directory reorganization, without rerunning the model.
+
 Run from this folder; the commands work in cmd and PowerShell.
 
 ```
-.venv\Scripts\python.exe scripts\preprocess.py
-.venv\Scripts\python.exe -u scripts\train_stage1_pretrain.py
-.venv\Scripts\python.exe -u scripts\train_stage2_finetune.py
+.venv\Scripts\python.exe src\scripts\preprocess.py
+.venv\Scripts\python.exe -u src\scripts\train_stage1_pretrain.py
+.venv\Scripts\python.exe -u src\scripts\train_stage2_finetune.py
 .venv\Scripts\python.exe tests\test.py
-.venv\Scripts\python.exe scripts\plot_results.py
+.venv\Scripts\python.exe src\scripts\plot_results.py
 ```
 
 | Script | What it does | Writes |
 |---|---|---|
-| `scripts/preprocess.py` | the three preprocessing stages (`--stage 1`, `2` or `3` reruns one) | `../data_preprocess/stage1`, `stage2`, `stage3` |
-| `scripts/train_stage1_pretrain.py` | pretraining, round A then round B | `models/{select,refit}/pretrain/backbone.pt` |
-| `scripts/train_stage2_finetune.py` | fine-tuning, round A then round B, and round A's validation report | `models/{select,refit}/finetune/model.pt`, `results/validation_summary.json`, `results/validation_predictions.csv`, `results/refit.json` |
-| `tests/test.py` | predicts the test set with the round B model | `submissions/submission_bert_two_stage.csv` |
-| `scripts/plot_results.py` | the four figures above | `results/figures/` |
+| `src/scripts/preprocess.py` | the three preprocessing stages (`--stage 1`, `2` or `3` reruns one) | `../data_preprocess/stage1`, `stage2`, `stage3` |
+| `src/scripts/train_stage1_pretrain.py` | pretraining, round A then round B | `models/{select,refit}/pretrain/backbone.pt` |
+| `src/scripts/train_stage2_finetune.py` | fine-tuning, round A then round B, and round A's validation report | `models/{select,refit}/finetune/model.pt`, `results/validation_summary.json`, `results/validation_predictions.csv`, `results/refit.json` |
+| `tests/test.py` | predicts the test set with the round B model | `results/submission_bert_two_stage.csv` |
+| `src/scripts/plot_results.py` | the four figures above | `results/figures/` |
 
 - Both training scripts accept `--round select` or `--round refit` to run one round, and `--config`, `--model-dir`, `--results-dir` to keep a second experiment apart from this one. `tests/test.py` accepts `--model-dir`, `--round select` (predict with the round A model) and `--output`.
 - Training resumes from the last finished epoch if it is interrupted; a run interrupted and resumed gives the same result as an uninterrupted one.
-- `tests/test.py` refuses to overwrite an existing submission. In this folder the training scripts find the finished run and stop immediately; to train again from scratch, pass new `--model-dir` and `--results-dir` folders and a new `--output`.
+- `tests/test.py` refuses to overwrite an existing submission. When the completed run has been restored under `models/`, the training scripts find it and stop immediately; to train again from scratch, pass new `--model-dir` and `--results-dir` folders and a new `--output`.
 - `powershell -ExecutionPolicy Bypass -File run.ps1` runs the two training scripts and the test script in order.
 - Rerunning `tests/test.py` on the saved round B model reproduces the submission byte for byte, and rerunning the preprocessing reproduces `../data_preprocess`.
 
@@ -245,7 +251,7 @@ A CUDA GPU is required; the batch of 1,024 needs about 20 GB of GPU memory with 
 
 ### Environment
 
-Python 3.12, PyTorch 2.10.0 (CUDA 12.8), Transformers 4.57.6, NumPy 2.3.5, pandas 3.0.1; `requirements.lock.txt` lists every package. `scripts/plot_results.py` additionally needs matplotlib.
+Python 3.12, PyTorch 2.10.0 (CUDA 12.8), Transformers 4.57.6, NumPy 2.3.5, pandas 3.0.1; `requirements.lock.txt` lists every package. `src/scripts/plot_results.py` additionally needs matplotlib.
 
 ```
 python -m venv .venv
@@ -258,13 +264,31 @@ python -m venv .venv
 
 | Path | Content |
 |---|---|
-| `preprocess/` | the three preprocessing stages, rent cleaning and the MRT opening calendar |
-| `bert_rent/` | data loading (`data.py`), model (`model.py`), training loop (`engine.py`), shared setup (`run.py`) |
-| `scripts/` | preprocessing, the two training stages, figures |
+| `src/preprocess/` | the three preprocessing stages, rent cleaning and the MRT opening calendar |
+| `src/bert_rent/` | data loading (`data.py`), model (`model.py`), training loop (`engine.py`), shared setup (`run.py`) |
+| `src/scripts/` | preprocessing, the two training stages, figures |
 | `tests/test.py` | test-set prediction |
 | `configs/bert.json` | the configuration of this run |
 | `models/` | `select/` (round A) and `refit/` (round B), each with `pretrain/` and `finetune/`: kept model, per-epoch `history.json`, `summary.json`, and `latest.pt` for resuming |
-| `results/` | `split.json`, `validation_summary.json`, `validation_predictions.csv`, `refit.json`, `environment.json`, `figures/`, `logs/` |
-| `submissions/` | the submission file |
+| `results/` | `split.json`, `validation_summary.json`, `validation_predictions.csv`, `refit.json`, `environment.json`, `figures/`, `logs/`, `submission_bert_two_stage.csv` |
+| `proposal/` | English proposal, editable slides and PDF, slide plan, presentation figures and build instructions |
+| `docs/` | course requirements, team workflow, progress plan, EDA report and method research |
+| `notebooks/` | reproducible EDA scripts and their separate dependency list |
+| `experiments/eda/` | recorded EDA tables, auxiliary-data audits and run manifest |
+| `experiments/research/` | research planning outputs and supporting scripts |
 
 The Git repository holds the code, configuration, small result files and figures. The Python environment, `models/`, the submission CSV, `results/validation_predictions.csv` and `results/logs/` are not in it (large, per-row or machine-specific); the commands in section 6 produce them.
+
+## 8. Proposal, EDA and research documents
+
+The proposal documents and their supporting EDA and research files have been restored into the current working tree from `7dbdb54`, alongside the author's two-stage BERT project at `6ed01ca`. The local `proposal` branch also preserves that earlier commit. No branch switch is needed to read or edit the documents.
+
+- [Proposal README](proposal/README.md): document contents and slide build instructions.
+- [Slide plan](proposal/SLIDE_PLAN.md): the 14-page structure, section allocation and owners. Pages 1–6 are drafted; pages 7–14 remain outlines pending completion.
+- [EDA reproduction guide](notebooks/README_EDA.md): commands and dependencies for the restored EDA. Its default repository-local `data/` input is separate from the BERT pipeline's sibling `../data/` layout described in section 6.
+- [Research index](docs/research/README.md): candidate methods, evidence, evaluation and priority planning.
+- [Team workflow](docs/TEAM_WORKFLOW.md) and [progress plan](docs/PROGRESS_PLAN.md): responsibilities and planned deliverables.
+
+The restored documents, figures and EDA outputs retain their original contents. Their progress statements describe the earlier proposal stage; the newer BERT experiment results remain in `results/` and in this README until the team updates the proposal. Restoring the files and organizing the code does not commit or push either branch.
+
+`src/` holds implementation and runnable scripts. `tests/test.py` retains its existing meaning as the test-set prediction command; it is not an automated unit-test suite. Predictions now default to `results/submission_bert_two_stage.csv`, alongside the existing metric summaries and figures. Explicit `--output`, `--results-dir`, `--model-dir`, `--config` and preprocessing path arguments remain available.
