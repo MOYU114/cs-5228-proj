@@ -273,6 +273,7 @@ python -m venv .venv
 | `results/` | `split.json`, `validation_summary.json`, `validation_predictions.csv`, `refit.json`, `environment.json`, `figures/`, `logs/`, `submission_bert_two_stage.csv` |
 | `proposal/` | English proposal, editable slides and PDF, slide plan, presentation figures and build instructions |
 | `docs/` | course requirements, team workflow, progress plan, EDA report and method research |
+| `report/` | [chapter-based final-report outline](report/README.md), [preparation and evidence index](report/PREPARATION.md), and `latex/main.tex` |
 | `notebooks/` | reproducible EDA scripts and their separate dependency list |
 | `experiments/eda/` | recorded EDA tables, auxiliary-data audits and run manifest |
 | `experiments/research/` | research planning outputs and supporting scripts |

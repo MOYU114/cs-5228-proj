@@ -1,0 +1,12 @@
+# New report build intermediates; original course-template files stay intact.
+main.aux
+main.fdb_latexmk
+main.fls
+main.log
+main.out
+main.synctex.gz
+cs5228-template.aux
+cs5228-template.fdb_latexmk
+cs5228-template.fls
+cs5228-template.log
+cs5228-template.synctex.gz

@@ -1,0 +1,40 @@
+\section{Task and Dataset}\label{sec:task}
+The temporal and data-quality patterns in Section~\ref{sec:introduction} determine how the prediction task is defined and which sources can be used without implying information that is unavailable at prediction time.
+
+\subsection{Prediction Task and Metric}
+Each row records an approved HDB rental application.  Let $x_i$ denote the property, location, facility and approval-month fields for row $i$, and let $y_i$ be \texttt{MONTHLY\_RENT} in Singapore dollars per month.  The task is supervised regression, $\hat y_i=f(x_i)$, with the root mean squared error in Eq.~\ref{eq:rmse}:
+\begin{equation}
+\label{eq:rmse}
+\mathrm{RMSE}=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(\hat y_i-y_i)^2},
+\end{equation}
+computed on the original SGD/month scale with one equal weight per evaluated row.  We also report mean absolute error (MAE) and mean error to make systematic under- or over-prediction visible.  The local validation numbers below are not scores on the unlabeled competition test set.
+
+\subsection{Core and Auxiliary Data}
+Table~\ref{tab:data_sources} summarizes the core and auxiliary files.  The core files contain 150,000 training rows and 50,000 test rows.  Training approvals span 2021-01--2025-03 (51 observed months), whereas test approvals span 2025-03--2026-07 (17 observed months).  Thus 49,620 test rows occur after the training maximum month and the maximum month index gap is 16; 380 test rows share the boundary month 2025-03 with training.  The test file has no rent target.  These counts describe records, not unique physical flats: the files contain repeated addresses and repeated feature combinations for different applications.
+% Source: ../../experiments/eda/core/summary.json.
+
+\begin{table}[t]
+\caption{Core and auxiliary sources used by the pipeline. Counts are rows in the local files; dates are approval or source coverage where available.}
+\label{tab:data_sources}
+\centering
+\footnotesize
+\begin{tabularx}{\columnwidth}{@{}l r X@{}}
+\toprule
+Source & Rows & Role and temporal scope \\
+\midrule
+Train CSV & 150,000 & Labeled approvals, 2021-01--2025-03; 11 columns including rent \\
+Test CSV & 50,000 & Prediction inputs, 2025-03--2026-07; 10 columns, no rent \\
+HDB blocks & 9,464 & Address key, coordinates, completion/floor facts and planning areas \\
+MRT stations & 243 & Coordinates and status; counts filtered by the opening calendar \\
+Schools & 337 & Coordinates and school level for static distance/count features \\
+Shopping malls & 113 & Coordinates for static distance/count features \\
+\bottomrule
+\end{tabularx}
+\end{table}
+% Source: ../../experiments/eda/core/summary.json; ../../experiments/eda/auxiliary/summary.json.
+
+The core predictors include approval month, town, block, street, flat type, flat model, floor area and lease commencement year.  \texttt{FURNISHED} is \texttt{yes} and \texttt{FEE} is zero in both splits, so the implementation audits them but excludes these constants from the model input.  The HDB block table is joined on the normalized \texttt{(TOWN, BLOCK, STREET)} key.  This key matches every train and test row to exactly one block record, with no one-to-many conflicts.  The resulting block coordinates support Haversine distances and the facility counts described in Section~\ref{sec:preprocessing}.
+% Source: ../../experiments/eda/auxiliary/summary.json; ../../src/preprocess/stage2_enrich.py.
+
+The repository also contains Certificate of Entitlement and stock-price tables.  They are not used in the reported model: their publication timing, historical snapshots and missing-value semantics are not sufficient for a clean fixed-origin feature protocol in the current implementation.  Schools and malls are static snapshots whose temporal limitations are discussed in Section~\ref{sec:discussion}.  The local files extend to July 2026, one month beyond the course description; we use the files as supplied.
+% Source: ../../experiments/eda/auxiliary/summary.json; ../../docs/Project Desc.md; ../../docs/EDA_REPORT.md.

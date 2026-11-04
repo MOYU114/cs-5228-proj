@@ -1,0 +1,46 @@
+\section{Data Preprocessing and Feature Engineering}\label{sec:preprocessing}
+The EDA decisions are implemented as three auditable preprocessing stages.  They are separate from the two training stages: preprocessing creates numeric tables, while training first reconstructs masked fields and then fits the rent head.
+
+\subsection{Normalization and Rent Cleaning}
+Stage~1 applies Unicode NFKC, trimming, lowercase conversion and whitespace collapse to text columns, canonicalizes flat-type spellings, and preserves a \texttt{ROW\_ID} for every source row.  It converts documented numeric and sentinel encodings without fuzzy address matching.  For target cleaning, comparables share the same town, block, street, flat type, flat model, floor area and lease commencement year.  Their approval months must lie within $\pm2$ months of the row being checked, and at least three comparables are required.  A rent is flagged when it is more than twice or less than half the comparable median and differs from that median by at least SGD~800.  The most extreme flagged value is removed first and the median is recomputed before the next removal.
+% Source: ../../src/preprocess/rent_cleaning.py.
+
+This procedure removes 315 of the 150,000 training rows and leaves 149,685.  For each remaining same-unit same-month group, the target is replaced by the group mean rounded to two decimals; the original value is retained as \texttt{MONTHLY\_RENT\_ORIGINAL}.  This is label aggregation, not row deduplication.  Under squared error, the mean is the minimizer for a group that receives one common prediction, while retaining every row preserves the original sampling weight.  The historical BERT pipeline applies this full-file cleaning before the time split.  Section~\ref{sec:evaluation} distinguishes its retained-row scores from the training-only cleaning used for strict baselines.
+% Source: ../../src/preprocess/rent_cleaning.py; ../../results/split.json; ../../results/validation_summary.json.
+
+\subsection{Building and Facility Features}
+Stage~2 joins each rental to the HDB block table with a many-to-one check on normalized \texttt{(TOWN, BLOCK, STREET)}.  The join adds planning geography, latitude, longitude, maximum floor and completion year.  For each row we compute Haversine distances using an Earth radius of 6,371,008.8~m, the nearest MRT distance, the mean distance to the nearest three stations, counts within 500 and 1,000~m, school distances and counts, and mall distances and counts.  MRT counts are evaluated using stations active from their first complete operating month in the explicit calendar.  School and mall features come from static snapshots, so their historical availability is not established by the join itself.
+% Source: ../../src/preprocess/stage2_enrich.py; ../../src/preprocess/mrt_calendar.json.
+
+All normalized train and test keys match exactly one HDB record.  Stage~3 converts missing \texttt{MAX\_FLOOR} and \texttt{YEAR\_COMPLETED} sentinels to derived missing values.  Completion year is imputed as lease year minus one, and maximum floor is filled from the street, subzone, town and then global median hierarchy; \texttt{HDB\_INFO\_MISSING} records which rows required this operation.  The imputation is a building-level fallback and must not be interpreted as an apartment's actual floor.
+% Source: ../../src/preprocess/stage3_encode.py; ../../experiments/eda/auxiliary/summary.json.
+
+\subsection{Encoding and Transformation}
+Table~\ref{tab:features} summarizes the 30 scalar inputs.  Eight categorical fields become integer IDs with zero reserved for unknown values.  Nine structural numeric fields and ten distance/count fields are standardized; the latter are first transformed with $\log(1+x)$ to reduce skew.  Month index, lease-based age and completion age are derived from the approval date, and month-of-year is represented by sine and cosine.  The calendar pair is presented to the model as one field token, so 30 scalars become 29 field tokens.
+
+\begin{table}[t]
+\caption{Feature groups after Stage~3 encoding.}
+\label{tab:features}
+\centering
+\footnotesize
+\begin{tabularx}{\columnwidth}{@{}l c X@{}}
+\toprule
+Group & Count & Encoding and EDA response \\
+\midrule
+Categorical IDs & 8 & Integer vocabularies; zero is unknown. The inputs are \texttt{TOWN\_ID}, \texttt{STREET\_ID}, \texttt{BUILDING\_ID}, \texttt{SUBZONE\_ID}, \texttt{PLANNING\_AREA\_ID}, \texttt{REGION\_ID}, \texttt{FLAT\_MODEL\_ID} and ordinal \texttt{FLAT\_TYPE\_ORD}. \\
+Structural numeric & 9 & z-score: area, lease year, ages, month index, coordinates and building facts. \\
+Facility numeric & 10 & $\log(1+x)$ then z-score for MRT, school and mall distances/counts. \\
+Calendar & 2 & Sine/cosine of month-of-year; one calendar token. Represents month-of-year seasonality. \\
+Missingness flag & 1 & \texttt{HDB\_INFO\_MISSING} for imputed building facts. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+% Source: ../../src/preprocess/stage3_encode.py; ../../src/bert_rent/data.py.
+
+The field names in Table~\ref{tab:features} also make the fate of each core column explicit.  \texttt{TOWN} is normalized, used in the HDB join, and encoded as \texttt{TOWN\_ID}.  \texttt{STREET} is normalized before the exact \texttt{(TOWN, BLOCK, STREET)} join, retained as \texttt{STREET\_ID}, and combined with \texttt{TOWN} and \texttt{BLOCK} into \texttt{BUILDING\_ID}; the raw string is not passed to the model.  \texttt{BLOCK} enters through the join and building ID, with no separate block input.  \texttt{SUBZONE} and \texttt{PLANNING\_AREA} become integer IDs from the joined HDB record, while \texttt{REGION} is encoded in the same way.  Canonicalized \texttt{FLAT\_TYPE} becomes the ordered \texttt{FLAT\_TYPE\_ORD}, and \texttt{FLAT\_MODEL} becomes \texttt{FLAT\_MODEL\_ID}.
+
+The raw \texttt{RENT\_APPROVAL\_DATE} string is converted to \texttt{MONTH\_INDEX}, \texttt{MONTH\_SIN}, \texttt{MONTH\_COS}, \texttt{AGE\_YEARS} and \texttt{COMPLETION\_AGE}, then dropped.  \texttt{FLOOR\_AREA\_SQM} and \texttt{LEASE\_COMMENCE\_DATE} remain standardized numeric inputs.  \texttt{FURNISHED} and \texttt{FEE} are constant in both splits and are dropped after the constant check.  The cleaned \texttt{MONTHLY\_RENT} is the training target; \texttt{MONTHLY\_RENT\_ORIGINAL} is retained only to score the preserved original labels.  Thus the model sees integer IDs and derived numeric fields, while the raw address and date strings do not enter the encoder.
+% Source: ../../src/preprocess/stage3_encode.py; ../../src/bert_rent/data.py.
+
+The flat-model vocabulary is learned from the retained training file and the HDB vocabularies from the block table.  Numeric means and population standard deviations are computed over all 149,685 retained training rows before the time split and then applied to both selection and validation rows.  These historical preprocessing statistics include the validation period.  The strict baseline protocol in Section~\ref{sec:evaluation} instead fits rental-derived state within the training window.
+% Source: ../../src/preprocess/stage3_encode.py; ../../report/PREPARATION.md.

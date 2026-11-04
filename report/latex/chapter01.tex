@@ -1,0 +1,17 @@
+\section{Introduction}\label{sec:introduction}
+Monthly-rent estimates are useful when tenants compare similar homes, when owners or agents set an asking rent, and when analysts study how housing access changes over time.  We formulate rent estimation as supervised regression in which most test approvals occur after the labeled training period.  Evaluation must reflect this temporal gap to assess whether estimates remain useful for future rentals.
+
+Three properties make this task harder than a random row split suggests.  First, 49,620 of the 50,000 test rows occur after the last labeled month, with a maximum gap of 16 months; the problem includes temporal extrapolation.  Second, the observed fields are coarse.  In the raw training file, 17,900 groups share every recorded predictor field but have multiple rents, covering 39,540 rows.  Floor level, condition and other unit-level attributes are unavailable, so identical inputs cannot receive different predictions.  Third, address strings and auxiliary tables use heterogeneous representations: formatting variants affect joins, building facts contain missing values, and facility snapshots do not establish their historical availability.  These properties motivate the preprocessing and temporal evaluation used below.
+% Source: ../../experiments/eda/core/summary.json; ../../experiments/eda/auxiliary/summary.json; ../../docs/Project Desc.md.
+
+We address these issues with an auditable pipeline.  It normalizes the core fields, applies a comparable-based rent cleaning rule while retaining the original label, joins each row to an HDB block and time-filtered MRT features, and encodes mixed fields as a fixed sequence.  A randomly initialized BERT encoder then undergoes masked-field reconstruction without rent labels and is fine-tuned with a regression head.  The reported selection run uses whole-month validation at the end of the labeled period; a full-data refit is trained only after the epoch counts have been selected.  The model applies existing transformer ideas to rental records.
+% Source: ../../src/preprocess/; ../../src/bert_rent/model.py; ../../src/scripts/train_stage1_pretrain.py; ../../src/scripts/train_stage2_finetune.py; ../../results/split.json.
+
+These observations lead to three research questions:
+\begin{itemize}
+    \item \textbf{RQ1:} Under a future-month holdout, how much accuracy is gained when moving from a global mean and a recent grouped mean to Ridge, a shallow tree ensemble and the two-stage BERT?
+    \item \textbf{RQ2:} Which feature groups matter most under a strict temporal protocol: location IDs, facility features or explicit time features?
+    \item \textbf{RQ3:} Where do errors concentrate across months and building coverage, and what do these patterns show about temporal extrapolation and the limits of the available fields?
+\end{itemize}
+Sections~\ref{sec:evaluation} and~\ref{sec:discussion} answer these questions with separate historical and strict protocols.  We connect EDA findings to reproducible normalization, target cleaning, geographic enrichment and numeric encoding; document the two-stage field-token model and controlled baseline comparisons; and analyze temporal, building-level and within-input error.
+% Source: ../../report/PREPARATION.md, Sections 4--6; ../../results/baselines/round_a/README.md.

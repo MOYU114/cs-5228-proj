@@ -1,0 +1,24 @@
+\section{Discussion and Limitations}\label{sec:discussion}
+\subsection{Answers to the Research Questions}
+\textbf{RQ1: Model complexity.} The recent town--flat-type mean captures much of the improvement over the global mean; the best historical model improves on the recent-mean RMSE by only about 30 SGD/month.  Shallow CatBoost and BERT differ by 0.23 RMSE, with BERT having lower MAE and absolute bias.  This single-window result supports a competitive shallow-tree baseline, but does not establish a general model ranking.
+% Source: ../../results/baselines/round_a/scores.csv; ../../results/validation_summary.json. About 30 SGD = historical B1_recent RMSE minus B3_catboost RMSE.
+
+\textbf{RQ2: Feature groups.} Time is the most influential tested group for Ridge and CatBoost.  The large negative bias after removing it suggests that matching later rent levels matters more than adding facility distances and counts to the existing location inputs.  This conclusion is conditional on the retained features and the joint removal of the time group.
+% Source: ../../results/baselines/round_a/ablation.csv; ../../results/baselines/round_a/scores.csv (strict rows).
+
+\textbf{RQ3: Error concentration.} Ridge increasingly overestimates later months, BERT's bias shifts from positive to negative, and CatBoost has higher RMSE on the small unseen-building sample.  BERT predictions also shrink toward typical rents, while within-input variation persists because the recorded fields cannot distinguish every unit.  These diagnostics identify temporal calibration, building coverage and missing unit detail as priorities beyond aggregate RMSE.
+% Source: ../../results/baselines/round_a/by_month.csv; ../../results/baselines/round_a/by_building_seen.csv; ../../results/validation_summary.json; ../../results/figures/fig3_predicted_vs_recorded.png.
+
+\subsection{Evidence and Protocol Limitations}
+BERT has not been evaluated without pretraining or with feature-group removals, leaving the benefit of masked-field reconstruction and its feature sensitivities unresolved.  Given the similar historical RMSE and the recorded computational cost, the current evidence provides little RMSE justification for the larger model.
+% Source: ../../results/baselines/round_a/README.md; ../../report/PREPARATION.md; ../../README.md.
+
+Historical target cleaning precedes the split, and numeric standardization uses all retained labeled rows.  Validation-period information can thus affect label-dependent cleaning and feature statistics; the original-label score also excludes the 100 removed validation rows.  Strict baselines address this preprocessing order and score all 35,158 original validation rows, but a strict BERT result is still missing.
+% Source: ../../results/split.json; ../../results/baselines/round_a/README.md; ../../report/PREPARATION.md.
+
+\subsection{Generalization and Future Work}
+The test horizon reaches 16 months beyond the training maximum, compared with 12 validation months.  Calendar features alone cannot guarantee a correct continuation of the rental level.  The test set also contains 102 rows from 50 blocks absent from the full training history.  Schools and malls are static snapshots without historical effective dates, and HDB facts omit unit-level floor and condition.  The reported associations cannot isolate causal rental drivers.
+% Source: ../../experiments/eda/core/summary.json; ../../experiments/eda/auxiliary/summary.json; ../../src/preprocess/stage2_enrich.py.
+
+The next priority is to retrain BERT under the strict protocol, then compare direct fine-tuning without pretraining and the same feature-group removals.  Exporting row-level predictions would enable building-level checks.  Further temporal validation windows would test whether the observed rankings and calibration patterns persist.
+% Source: ../../results/baselines/round_a/README.md; ../../report/PREPARATION.md, Sections 5--6; ../../docs/research/PRIORITY_PLAN.md. These are future experiments, not reported results.
