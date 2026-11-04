@@ -1,0 +1,88 @@
+{
+  "base_commit": "f64a5c3a19e414470ab60ac8b0e166281ee5b5a3",
+  "command": [
+    "src/scripts/run_baselines.py",
+    "--work-dir",
+    "../baseline_work/round_a",
+    "--output-dir",
+    "results/baselines/round_a"
+  ],
+  "python": "3.10.12 (main, May 27 2025, 17:12:29) [GCC 11.4.0]",
+  "versions": {
+    "pandas": "2.3.3",
+    "numpy": "2.2.6",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.15.3",
+    "catboost": "1.2.8",
+    "matplotlib": "3.10.7"
+  },
+  "cutoff": "2024-03",
+  "B1": {
+    "months": 6,
+    "min_group_rows": 10
+  },
+  "ridge": {
+    "alpha": 10.0,
+    "solver": "lsqr",
+    "tol": 1e-06,
+    "max_iter": 3000
+  },
+  "tree": {
+    "iterations": 500,
+    "depth": 4,
+    "learning_rate": 0.1,
+    "random_seed": 42,
+    "loss_function": "RMSE",
+    "max_ctr_complexity": 1,
+    "thread_count": 3,
+    "task_type": "CPU",
+    "allow_writing_files": false,
+    "verbose": false
+  },
+  "ablation_drops": {
+    "full": [],
+    "no_street_building": [
+      "STREET_ID",
+      "BUILDING_ID"
+    ],
+    "no_facilities": [
+      "MRT_NEAREST_M",
+      "MRT_NEAREST3_MEAN_M",
+      "MRT_COUNT_500M",
+      "MRT_COUNT_1000M",
+      "PRIMARY_NEAREST_M",
+      "SECONDARY_NEAREST_M",
+      "PRIMARY_COUNT_1000M",
+      "MALL_NEAREST_M",
+      "MALL_COUNT_1000M",
+      "MALL_COUNT_2000M"
+    ],
+    "no_explicit_time": [
+      "MONTH_INDEX",
+      "MONTH_SIN",
+      "MONTH_COS",
+      "AGE_YEARS",
+      "COMPLETION_AGE"
+    ]
+  },
+  "folds": {
+    "historical": {
+      "train_rows": 114627,
+      "validation_rows": 35058,
+      "B1_sources": {
+        "town_type": 34924,
+        "type": 134,
+        "global": 0
+      }
+    },
+    "strict": {
+      "train_rows": 114633,
+      "validation_rows": 35158,
+      "B1_sources": {
+        "town_type": 35024,
+        "type": 134,
+        "global": 0
+      }
+    }
+  }
+}

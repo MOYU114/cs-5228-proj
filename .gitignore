@@ -10,6 +10,7 @@ models*/
 # Per-row prediction files and console logs stay local
 results/submission*.csv
 results/validation_predictions.csv
+results/baselines/*/predictions/
 results/logs/
 
 # The figures shown in README.md are part of the repository
