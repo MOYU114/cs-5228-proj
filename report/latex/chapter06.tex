@@ -38,7 +38,7 @@ The project README records 86.2 million regression-model parameters and about 4~
 
 
 \subsection{Feature-Group Ablation (RQ2)}
-Table~\ref{tab:ablation} reports strict-protocol ablations, each retraining the same model and configuration after removing one group.  Removing street and building IDs raises RMSE by 8.52 for Ridge and 2.95 for CatBoost.  Removing ten facility fields changes RMSE by less than 1 SGD/month with town, coordinates and other location fields retained.  The largest increases follow removal of the time group: +85.64 for Ridge and +232.26 for CatBoost.
+Table~\ref{tab:ablation} reports strict-protocol ablations, each retraining the same model and configuration after removing one group.  Removing street and building IDs raises RMSE by 8.52 for Ridge and 2.95 for CatBoost.  Removing ten facility fields changes RMSE by less than 1 SGD/month with town, coordinates and other location fields retained.  The largest increases follow removal of the time group: +85.64 for Ridge and +232.26 for CatBoost.  Because all other groups stay in the model, each $\Delta$ measures a group's additional predictive value given the remaining features, not its standalone importance.
 % Source: ../../results/baselines/round_a/ablation.csv; ../../src/scripts/run_baselines.py (ABLATIONS).
 
 The time group contains five fields: month index, two cyclic components, lease-based age and completion age.  Its joint effect cannot be assigned to any single field.  CatBoost's strict bias shifts from $-33.28$ to $-505.62$ SGD/month without this group, approaching the strict global-mean bias of $-528.94$.  This is consistent with losing the ability to track the later rental level, even though time-filtered MRT features can still carry indirect time information.  BERT has no feature-group ablation.
@@ -93,7 +93,9 @@ Thus 168.04 SGD is the RMS within-input variation isolated by this decomposition
 \subsection{Error Analysis (RQ3)}
 Figure~\ref{fig:validation_month} shows month-wise BERT error.  The upper panel contains the two RMSE curves; the lower panel shows monthly mean error as bars.  On the original labels, RMSE is high in 2024-04 (503.3 SGD) and 2024-06 (496.6 SGD) and falls below 445 SGD in 2025-02 and 2025-03.  Mean error moves from +32.9 SGD in 2024-06 to $-52.8$ SGD in 2025-03, so the model is initially high and later low relative to the observed labels.  This sign change indicates residual temporal drift.
 
-The baseline files provide complementary temporal evidence.  In the historical window, shallow CatBoost has lower monthly RMSE in the first five months, whereas BERT is lower in the final seven months.  Ridge's historical monthly mean error grows from approximately +218 SGD in 2024-04 to +532 SGD in 2025-03, a pattern consistent with overly strong linear time extrapolation.
+The baseline files provide complementary temporal evidence.  In the historical window, shallow CatBoost has lower monthly RMSE in the first five months, whereas BERT is lower in the final seven months.  Ridge's historical monthly mean error grows from approximately +218 SGD in 2024-04 to +532 SGD in 2025-03, a pattern consistent with overly strong linear time extrapolation.  Figure~\ref{fig:model_bias} shows these monthly biases.  The recent six-month town--flat-type mean (RMSE 497.97) is also more accurate than Ridge (606.82) in Table~\ref{tab:model_comparison}: even with area and location inputs, how the past rent trend is carried into future months strongly affects the estimate.
+% Source: ../../results/baselines/round_a/by_month.csv (historical, full features); ../../results/validation_summary.json (BERT by_month mean_error); ../../results/baselines/round_a/scores.csv. Figure: photo/make_figures.py, model_bias_by_month().
+
 % Source: ../../results/validation_summary.json; ../../results/baselines/round_a/by_month.csv; ../../results/baselines/round_a/README.md.
 
 \begin{figure}[t]
@@ -101,6 +103,13 @@ The baseline files provide complementary temporal evidence.  In the historical w
 \includegraphics[width=\columnwidth]{fig4_validation_by_month.pdf}
 \caption{Historical BERT validation by approval month for the same 35,058 retained rows.  The upper panel shows RMSE on cleaned and original recorded rents; the lower panel shows mean error (prediction minus original recorded rent).  All values are SGD/month.}
 \label{fig:validation_month}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig6_model_bias_by_month.pdf}
+\caption{Monthly mean error (prediction minus original recorded rent) under the historical protocol, 35,058 retained validation rows, SGD/month.  Ridge over-predicts increasingly over time, while the other models stay within 85~SGD of zero.  The global mean (bias about $-500$) is omitted for scale.}
+\label{fig:model_bias}
 \end{figure}
 
 Building coverage exposes a second generalization boundary.  Under the strict protocol, CatBoost RMSE is 475.50 for buildings seen during training and 548.26 for unseen buildings; the unseen group contains only 151 rows.  The small unseen sample makes that estimate uncertain.  BERT's row-level predictions are unavailable for this building-level breakdown.

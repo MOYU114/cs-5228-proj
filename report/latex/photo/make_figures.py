@@ -5,6 +5,7 @@ Inputs (read only):
   experiments/eda/core/{monthly_counts,rent_by_month,rent_by_flat_type}.csv   -> fig1, fig2
   results/validation_summary.json                                             -> fig4
   results/validation_predictions.csv (local, gitignored; skipped if absent)   -> fig5
+  results/baselines/round_a/by_month.csv + validation_summary.json            -> fig6
 Every figure is drawn at its final printed width (one column = 3.5 in), so the
 8 pt labels and 7 pt ticks print at that size and match across figures.
 """
@@ -146,8 +147,36 @@ def predicted_vs_recorded():
     save(fig, 'fig5_predicted_vs_recorded.pdf')
 
 
+def model_bias_by_month():
+    """Monthly mean error (prediction minus original rent), historical protocol, 35,058 rows."""
+    frame = pd.read_csv(RESULTS / 'baselines/round_a/by_month.csv')
+    frame = frame[(frame.protocol == 'historical') & (frame.features == 'full')]
+    summary = json.loads((RESULTS / 'validation_summary.json').read_text())
+    months = sorted(summary['by_month'])
+    assert sum(summary['by_month'][m]['rows'] for m in months) == 35058
+    x = np.arange(len(months))
+    fig, ax = plt.subplots(figsize=(COLUMN, 1.9))
+    styles = [('B2_ridge', 'Ridge', '#7b3294', 'v-'), ('B1_recent', 'Recent 6-month mean', GRAY, 'D-'),
+              ('B3_catboost', 'Shallow CatBoost', ORANGE, 's-')]
+    for key, label, color, marker in styles:
+        rows = frame[frame.model == key].set_index('RENT_APPROVAL_DATE').loc[months]
+        assert rows.rows.sum() == 35058
+        ax.plot(x, rows.bias, marker, color=color, markersize=2.5, label=label)
+    ax.plot(x, [summary['by_month'][m]['mean_error'] for m in months], 'o-', color=BLUE, markersize=2.5,
+            label='Two-stage BERT')
+    ax.axhline(0, color=INK, linewidth=.6)
+    ax.set_ylabel('Mean error (SGD/month)')
+    ax.set_ylim(-120, 580)
+    ax.set_xticks(x[::2], months[::2])
+    ax.set_xlabel('Approval month')
+    ax.grid(axis='x', visible=False)
+    ax.legend(ncol=2, loc='lower center', bbox_to_anchor=(.5, 1.0))
+    save(fig, 'fig6_model_bias_by_month.pdf')
+
+
 if __name__ == '__main__':
     rent_timeline()
     flat_type_iqr()
     validation_by_month()
     predicted_vs_recorded()
+    model_bias_by_month()
