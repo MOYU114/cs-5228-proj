@@ -4,7 +4,7 @@ The encoded table from Section~\ref{sec:preprocessing} is treated as a short seq
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.9\textwidth]{fig_pretrain_finetune.pdf}
+\includegraphics[width=0.75\textwidth]{fig_pretrain_finetune.pdf}
 \caption{Overview of the two-stage procedure.  Left: during pretraining, randomly selected field tokens of an HDB rental record are replaced by \texttt{[MASK]} and the encoder reconstructs them (e.g., town, area, flag); rent is not used.  Right: the pretrained backbone is reused, and a regression head on the \texttt{[CLS]} output predicts the monthly rent.  Figure~\ref{fig:architecture} gives the layer-level details.}
 \label{fig:pretrain_finetune}
 \end{figure*}
