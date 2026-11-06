@@ -1,6 +1,13 @@
 \section{Data Mining Methods}\label{sec:methods}
-The encoded table from Section~\ref{sec:preprocessing} is treated as a short sequence of fields, so the model can learn interactions between location, dwelling attributes and time.  The implementation follows the masked-token and self-attention ideas of BERT and the Transformer architecture~\cite{devlin2019bert,vaswani2017attention}; its field-wise input construction is also related to FT-Transformer for tabular data~\cite{gorishniy2021revisiting}.
+The encoded table from Section~\ref{sec:preprocessing} is treated as a short sequence of fields, so the model can learn interactions between location, dwelling attributes and time.  The implementation follows the masked-token and self-attention ideas of BERT and the Transformer architecture~\cite{devlin2019bert,vaswani2017attention}; its field-wise input construction is also related to FT-Transformer for tabular data~\cite{gorishniy2021revisiting}.  Figure~\ref{fig:pretrain_finetune} gives an overview: the same BERT backbone is first pretrained to reconstruct masked field tokens and is then fine-tuned with a regression head on \texttt{[CLS]} to predict monthly rent.
 % Source: ../../src/bert_rent/model.py; ../../src/bert_rent/data.py; ../../configs/bert.json.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{fig_pretrain_finetune.pdf}
+\caption{Overview of the two-stage procedure.  Left: during pretraining, randomly selected field tokens of an HDB rental record are replaced by \texttt{[MASK]} and the encoder reconstructs them (e.g., town, area, flag); rent is not used.  Right: the pretrained backbone is reused, and a regression head on the \texttt{[CLS]} output predicts the monthly rent.  Figure~\ref{fig:architecture} gives the layer-level details.}
+\label{fig:pretrain_finetune}
+\end{figure*}
 
 \subsection{Related Work}
 Dynamic hedonic models relate housing prices to property attributes while allowing these relationships to vary across time and municipalities~\cite{meese1991hedonic}.  Tabular-learning benchmarks find that tree methods remain competitive on medium-sized datasets, motivating a categorical-feature baseline such as CatBoost~\cite{grinsztajn2022trees,prokhorenkova2018catboost}.  Neural alternatives use different mechanisms: TabM builds parameter-efficient MLP ensembles~\cite{gorishniy2025tabm}, while TabPFN learns from synthetic tasks and predicts using labeled examples as context~\cite{hollmann2025tabpfn}.  ModernNCA learns representations for neighborhood-based prediction~\cite{ye2025modernnca}.  These three neural alternatives were considered but not run in this study.  Our experiments compare the recorded baselines and field-token BERT under future-month protocols, whose rankings must be checked on the rental data itself.
